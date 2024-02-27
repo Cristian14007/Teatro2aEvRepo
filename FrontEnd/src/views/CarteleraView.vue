@@ -1,35 +1,21 @@
-
 <script setup lang="ts">
+import ObrasDisplay from "../components/ObrasDisplay.vue"
 
-import SoyHeader from '../components/SoyHeader.vue'
-import SoyFooter from '../components/SoyFooter.vue'
-/* import Card from './components/Card.vue' */
-
-
-
-
-function reciboClick(a:string) {
-  console.log('click', a)
-}
 </script>
 
 <template>
+ <section class="menu" id="menu">
+<br>
+<h1 class="heading"> Cartelera <span>obras</span> </h1>
 
-
-  
-  <main>
-    <br><br><br><br>
-    <section class="menu" id="menu">
-
-<h1 class="heading"> CARTELERA </h1>
 
 </section>
+    <ObrasDisplay></ObrasDisplay>
  
 
-  </main>
-
-
+   
 </template>
+
 
 <style scoped>
 .heading {
@@ -46,4 +32,3 @@ function reciboClick(a:string) {
 
 
 </style>
-
