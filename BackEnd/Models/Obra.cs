@@ -14,7 +14,15 @@ public class Obra
         public string Descripcion { get; set; }
         [Required]
         public string Genero { get; set; }
-        public List<Sesion> Sesiones { get; set; }
+        [Required]
+        public string Duracion {get; set;}
+        [Required]
+        public string Director {get; set;}
+        [Required]
+        public string Interpretes {get; set;}
+        //public List<Sesion> Sesiones { get; set; }
+
+        public List<AsientosObra> ListAsientosObra { get; set; }
 
     
 
