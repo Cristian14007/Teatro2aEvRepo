@@ -1,13 +1,14 @@
 <script setup lang="ts">
 defineProps(['obra']);
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
   <div class="card">
     <img :src="obra.imagen" :alt="obra.titulo" />
     <h3>{{ obra.titulo }}</h3>
-    <RouterLink to="/horario" class="btn" id="cartebtn">Comprar entradas</RouterLink>
-  </div>
+    <RouterLink :to="{ name: 'HorarioView', params: { obraId: obra.obraId }}" class="btn" id="cartebtn">Comprar entradas</RouterLink>
+    </div>
 </template>
 
 <style scoped>

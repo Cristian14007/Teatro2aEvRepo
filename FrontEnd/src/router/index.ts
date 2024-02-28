@@ -16,7 +16,7 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name:'home',
+            name: 'home',
             component: HomeView
         },
         {
@@ -25,23 +25,23 @@ const router = createRouter({
             component: CarteleraView
         },
         {
-            path: '/horario',
-            name: 'horario',
+            path: '/horario/:obraId',
+            name: 'HorarioView',
             component: HorarioView
         },
         {
-            path: '/reserva',
-            name: 'reserva',
+            path: '/reserva/:obraId',
+            name: 'ReservaView',
             component: ReservaView
         },
         {
-            path: '/compra',
-            name: 'compra',
+            path: '/compra/:obraId',
+            name: 'CompraView',
             component: CompraView
         },
         {
-            path: '/entrada',
-            name: 'entrada',
+            path: '/entrada/:obraId',
+            name: 'EntradaView',
             component: EntradaView
         },
         {

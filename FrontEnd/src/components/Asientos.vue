@@ -136,7 +136,7 @@
               </div>-->
               <div class="movieName">
                 <p>Nombre Obra</p>
-                <h1 id="movieName"> </h1>
+                <h1 id="movieName">  {{ obra ? obra.titulo : 'Cargando...' }}</h1>
               </div>
               <div class="moviePrice">
                 <p>Precio obra</p>
@@ -174,8 +174,8 @@
               </div>
               <div class="proceedBtnEl">
                 <!--<button href="Compra.html?id=placeholder" id="proceedBtn">Continuar</button>-->
-                <RouterLink to="/compra" class="btn" id="proceedBtn">Continuar</RouterLink>
-                </div>
+                <RouterLink :to="{ name: 'CompraView', params: { obraId: obra?.obraId ?? 'defaultId' }}" class="btn" id="proceedBtn">Continuar</RouterLink>
+              </div>
             </div>
           </div>
         </div>
@@ -183,12 +183,43 @@
     </div>
   </section>
 </section>
+
 </template>
   
   
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+const obraId = route.params.obraId;
+const obra = ref<Obra | null>(null);
+
+interface Obra {
+  obraId: number;
+  titulo: string;
+  imagen: string;
+  descripcion: string;
+  genero: string;
+  duracion: string;
+  director: string;
+  interpretes: string;
+}
+
+// Simula una función para cargar los datos de la obra basada en obraId
+onMounted(async () => {
+  try {
+    const response = await fetch(`http://localhost:5008/Obra/${obraId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+    obra.value = await response.json();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
 </script>
+  
   
   
 <style scoped>

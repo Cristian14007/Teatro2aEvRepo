@@ -12,10 +12,10 @@
                     <div class="col-6" style="border: 3px solid black; padding: 20px; text-align: center;">
                         <h2>Género</h2>
                     </div>
-                    <div class="col-6" id="obra-genero"
-                        style="border: 3px solid black; padding: 20px; text-align: center; font-size:200%;">
-                        <!-- El género de la obra se mostrará aquí -->
-                    </div>
+                    <div class="col-6" style="border: 3px solid black; padding: 20px; text-align: center; font-size:200%;">
+        <!-- Se muestra el género de la obra aquí, asegurándose primero de que obra no es null  {{ obra.value?.genero }}-->
+        {{ obra ? obra.genero : 'Cargando...' }}
+      </div>
                 </div>
                 <!-- Primera fila con dos columnas -->
                 <div class="row">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-6" id="obra-descripcion"
                         style="border: 3px solid black; padding: 20px; text-align: center; font-size:120%;">
-                        <!-- El descrip de la obra se mostrará aquí -->
+                        {{ obra ? obra.descripcion : 'Cargando...' }}
                     </div>
                 </div>
                 <!-- Primera fila con dos columnas -->
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-6" id="obra-duracion"
                         style="border: 3px solid black; padding: 20px; text-align: center; font-size:200%;">
-                        <!-- El duracion de la obra se mostrará aquí -->
+                        {{ obra ? obra.duracion : 'Cargando...' }}
                     </div>
                 </div>
                 <!-- Primera fila con dos columnas -->
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-6" id="obra-director"
                         style="border: 3px solid black; padding: 20px; text-align: center; font-size:200%;">
-                        <!-- El director de la obra se mostrará aquí -->
+                        {{ obra ? obra.director : 'Cargando...' }}
                     </div>
                 </div>
                 <!-- Primera fila con dos columnas -->
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-6" id="obra-interpretes"
                         style="border: 3px solid black; padding: 20px; text-align: center;font-size:150%;">
-                        <!-- El interpretes de la obra se mostrará aquí -->
+                        {{ obra ? obra.interpretes : 'Cargando...' }}
                     </div>
                 </div>
             </div>
@@ -65,7 +65,36 @@
   
   
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+const obraId = route.params.obraId;
+const obra = ref<Obra | null>(null);
+
+interface Obra {
+  obraId: number;
+  titulo: string;
+  imagen: string;
+  descripcion: string;
+  genero: string;
+  duracion: string;
+  director: string;
+  interpretes: string;
+}
+
+// Simula una función para cargar los datos de la obra basada en obraId
+onMounted(async () => {
+  try {
+    const response = await fetch(`http://localhost:5008/Obra/${obraId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+    obra.value = await response.json();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
 </script>
   
   
