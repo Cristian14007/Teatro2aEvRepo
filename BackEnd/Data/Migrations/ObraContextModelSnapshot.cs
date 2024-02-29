@@ -393,6 +393,15 @@ namespace BackEnd.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Fecha_Estreno_1")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Fecha_Estreno_2")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Genero")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -405,9 +414,18 @@ namespace BackEnd.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Precio")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sala")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Valoracion")
+                        .HasColumnType("int");
 
                     b.HasKey("ObraId");
 
@@ -420,10 +438,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Una obra de Shakespeare.",
                             Director = "Andres Torres",
                             Duracion = "120 mins",
+                            Fecha = new DateTime(2024, 3, 20, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 8, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
                             Imagen = "ruta imagen 1",
                             Interpretes = "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía",
-                            Titulo = "Hamlet"
+                            Precio = 30,
+                            Sala = 1,
+                            Titulo = "Hamlet",
+                            Valoracion = 4
                         },
                         new
                         {
@@ -431,10 +455,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Un musical épico.",
                             Director = "Mutombo Martinez",
                             Duracion = "150 mins",
+                            Fecha = new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
                             Imagen = "ruta imagen 2",
                             Interpretes = "Marta Soler, Luis Gomez, Ana Páez, Mario Ruiz",
-                            Titulo = "El Rey León"
+                            Precio = 25,
+                            Sala = 2,
+                            Titulo = "El Rey León",
+                            Valoracion = 5
                         },
                         new
                         {
@@ -442,10 +472,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "El clásico de Shakespeare sobre dos amantes desafortunados.",
                             Director = "Carlos Vidal",
                             Duracion = "130 mins",
+                            Fecha = new DateTime(2024, 3, 19, 22, 15, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 9, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Tragedia",
                             Imagen = "ruta imagen 3",
                             Interpretes = "Elena Nuñez, Jorge Sanz",
-                            Titulo = "Romeo y Julieta"
+                            Precio = 20,
+                            Sala = 3,
+                            Titulo = "Romeo y Julieta",
+                            Valoracion = 4
                         },
                         new
                         {
@@ -453,10 +489,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Una representación intensa de la obra maestra de Federico García Lorca.",
                             Director = "Irene Moya",
                             Duracion = "90 mins",
+                            Fecha = new DateTime(2024, 3, 20, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 12, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 8, 19, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
                             Imagen = "ruta imagen 4",
                             Interpretes = "Carmen Linares, Pilar Tena, Laura Ortega",
-                            Titulo = "La Casa de Bernarda Alba"
+                            Precio = 30,
+                            Sala = 4,
+                            Titulo = "La Casa de Bernarda Alba",
+                            Valoracion = 5
                         },
                         new
                         {
@@ -464,10 +506,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Una obra clásica española, llena de romance y aventura.",
                             Director = "Roberto Gómez",
                             Duracion = "110 mins",
+                            Fecha = new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 16, 22, 45, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
                             Imagen = "ruta imagen 5",
                             Interpretes = "Juan Martínez, Clara Ros, Miguel Ángel Jiménez",
-                            Titulo = "Don Juan Tenorio"
+                            Precio = 20,
+                            Sala = 3,
+                            Titulo = "Don Juan Tenorio",
+                            Valoracion = 2
                         },
                         new
                         {
@@ -475,10 +523,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "El famoso musical de Andrew Lloyd Webber que ha encantado a audiencias de todo el mundo.",
                             Director = "Mónica García",
                             Duracion = "140 mins",
+                            Fecha = new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 18, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 8, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
                             Imagen = "ruta imagen 6",
                             Interpretes = "Ana Belén, Luis Fonsi, Rosalía Vila",
-                            Titulo = "Cats"
+                            Precio = 25,
+                            Sala = 1,
+                            Titulo = "Cats",
+                            Valoracion = 5
                         },
                         new
                         {
@@ -486,10 +540,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Un épico musical basado en la novela de Victor Hugo.",
                             Director = "Jaime Costa",
                             Duracion = "165 mins",
+                            Fecha = new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
                             Imagen = "ruta imagen 7",
                             Interpretes = "Pedro Fernández, Diana Navarro, Sergio Dalma",
-                            Titulo = "Les Misérables"
+                            Precio = 25,
+                            Sala = 3,
+                            Titulo = "Les Misérables",
+                            Valoracion = 3
                         },
                         new
                         {
@@ -497,10 +557,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Una de las últimas obras maestras de Shakespeare, llena de magia y misterio.",
                             Director = "Lucía Hernández",
                             Duracion = "135 mins",
+                            Fecha = new DateTime(2024, 3, 23, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 20, 21, 15, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 14, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Comedia",
                             Imagen = "ruta imagen 7",
                             Interpretes = "Carlos Sánchez, Marta Rivera, Daniel López",
-                            Titulo = "La Tempestad"
+                            Precio = 20,
+                            Sala = 3,
+                            Titulo = "La Tempestad",
+                            Valoracion = 4
                         },
                         new
                         {
@@ -508,10 +574,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "El clásico musical inspirado en Romeo y Julieta, ambientado en Nueva York de los años 50.",
                             Director = "Roberto Álvarez",
                             Duracion = "160 mins",
+                            Fecha = new DateTime(2024, 3, 19, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 16, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
                             Imagen = "ruta imagen 7",
                             Interpretes = "Ángela Ponce, Miguel Torres, Laura Jiménez",
-                            Titulo = "West Side Story"
+                            Precio = 25,
+                            Sala = 3,
+                            Titulo = "West Side Story",
+                            Valoracion = 3
                         },
                         new
                         {
@@ -519,10 +591,16 @@ namespace BackEnd.Data.Migrations
                             Descripcion = "Un espectacular musical basado en la novela de Gaston Leroux.",
                             Director = "Sofía Martín",
                             Duracion = "150 mins",
+                            Fecha = new DateTime(2024, 3, 21, 22, 45, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_1 = new DateTime(2024, 4, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fecha_Estreno_2 = new DateTime(2024, 5, 28, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
                             Imagen = "ruta imagen 7",
                             Interpretes = "Javier Gómez, Raquel del Pozo, Mario Casas",
-                            Titulo = "Phantom of the Opera"
+                            Precio = 30,
+                            Sala = 4,
+                            Titulo = "Phantom of the Opera",
+                            Valoracion = 5
                         });
                 });
 

@@ -16,8 +16,6 @@ public class Sesion
     
     public List<Asiento> Asientos { get; set; }
 
-    
-
     public Sesion (){
 
     }

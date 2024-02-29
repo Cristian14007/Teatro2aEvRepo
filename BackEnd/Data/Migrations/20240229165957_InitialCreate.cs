@@ -21,7 +21,13 @@ namespace BackEnd.Data.Migrations
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duracion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Director = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Interpretes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Interpretes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fecha_Estreno_1 = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fecha_Estreno_2 = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Sala = table.Column<int>(type: "int", nullable: false),
+                    Valoracion = table.Column<int>(type: "int", nullable: false),
+                    Precio = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -148,19 +154,19 @@ namespace BackEnd.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Obras",
-                columns: new[] { "ObraId", "Descripcion", "Director", "Duracion", "Genero", "Imagen", "Interpretes", "Titulo" },
+                columns: new[] { "ObraId", "Descripcion", "Director", "Duracion", "Fecha", "Fecha_Estreno_1", "Fecha_Estreno_2", "Genero", "Imagen", "Interpretes", "Precio", "Sala", "Titulo", "Valoracion" },
                 values: new object[,]
                 {
-                    { 1, "Una obra de Shakespeare.", "Andres Torres", "120 mins", "Drama", "ruta imagen 1", "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía", "Hamlet" },
-                    { 2, "Un musical épico.", "Mutombo Martinez", "150 mins", "Musical", "ruta imagen 2", "Marta Soler, Luis Gomez, Ana Páez, Mario Ruiz", "El Rey León" },
-                    { 3, "El clásico de Shakespeare sobre dos amantes desafortunados.", "Carlos Vidal", "130 mins", "Tragedia", "ruta imagen 3", "Elena Nuñez, Jorge Sanz", "Romeo y Julieta" },
-                    { 4, "Una representación intensa de la obra maestra de Federico García Lorca.", "Irene Moya", "90 mins", "Drama", "ruta imagen 4", "Carmen Linares, Pilar Tena, Laura Ortega", "La Casa de Bernarda Alba" },
-                    { 5, "Una obra clásica española, llena de romance y aventura.", "Roberto Gómez", "110 mins", "Drama", "ruta imagen 5", "Juan Martínez, Clara Ros, Miguel Ángel Jiménez", "Don Juan Tenorio" },
-                    { 6, "El famoso musical de Andrew Lloyd Webber que ha encantado a audiencias de todo el mundo.", "Mónica García", "140 mins", "Musical", "ruta imagen 6", "Ana Belén, Luis Fonsi, Rosalía Vila", "Cats" },
-                    { 7, "Un épico musical basado en la novela de Victor Hugo.", "Jaime Costa", "165 mins", "Musical", "ruta imagen 7", "Pedro Fernández, Diana Navarro, Sergio Dalma", "Les Misérables" },
-                    { 8, "Una de las últimas obras maestras de Shakespeare, llena de magia y misterio.", "Lucía Hernández", "135 mins", "Comedia", "ruta imagen 7", "Carlos Sánchez, Marta Rivera, Daniel López", "La Tempestad" },
-                    { 9, "El clásico musical inspirado en Romeo y Julieta, ambientado en Nueva York de los años 50.", "Roberto Álvarez", "160 mins", "Musical", "ruta imagen 7", "Ángela Ponce, Miguel Torres, Laura Jiménez", "West Side Story" },
-                    { 10, "Un espectacular musical basado en la novela de Gaston Leroux.", "Sofía Martín", "150 mins", "Drama", "ruta imagen 7", "Javier Gómez, Raquel del Pozo, Mario Casas", "Phantom of the Opera" }
+                    { 1, "Una obra de Shakespeare.", "Andres Torres", "120 mins", new DateTime(2024, 3, 20, 20, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 8, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified), "Drama", "ruta imagen 1", "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía", 30, 1, "Hamlet", 4 },
+                    { 2, "Un musical épico.", "Mutombo Martinez", "150 mins", new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified), "Musical", "ruta imagen 2", "Marta Soler, Luis Gomez, Ana Páez, Mario Ruiz", 25, 2, "El Rey León", 5 },
+                    { 3, "El clásico de Shakespeare sobre dos amantes desafortunados.", "Carlos Vidal", "130 mins", new DateTime(2024, 3, 19, 22, 15, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 9, 21, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified), "Tragedia", "ruta imagen 3", "Elena Nuñez, Jorge Sanz", 20, 3, "Romeo y Julieta", 4 },
+                    { 4, "Una representación intensa de la obra maestra de Federico García Lorca.", "Irene Moya", "90 mins", new DateTime(2024, 3, 20, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 12, 21, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 8, 19, 30, 0, 0, DateTimeKind.Unspecified), "Drama", "ruta imagen 4", "Carmen Linares, Pilar Tena, Laura Ortega", 30, 4, "La Casa de Bernarda Alba", 5 },
+                    { 5, "Una obra clásica española, llena de romance y aventura.", "Roberto Gómez", "110 mins", new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 16, 22, 45, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified), "Drama", "ruta imagen 5", "Juan Martínez, Clara Ros, Miguel Ángel Jiménez", 20, 3, "Don Juan Tenorio", 2 },
+                    { 6, "El famoso musical de Andrew Lloyd Webber que ha encantado a audiencias de todo el mundo.", "Mónica García", "140 mins", new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 18, 20, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 8, 22, 30, 0, 0, DateTimeKind.Unspecified), "Musical", "ruta imagen 6", "Ana Belén, Luis Fonsi, Rosalía Vila", 25, 1, "Cats", 5 },
+                    { 7, "Un épico musical basado en la novela de Victor Hugo.", "Jaime Costa", "165 mins", new DateTime(2024, 3, 22, 21, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified), "Musical", "ruta imagen 7", "Pedro Fernández, Diana Navarro, Sergio Dalma", 25, 3, "Les Misérables", 3 },
+                    { 8, "Una de las últimas obras maestras de Shakespeare, llena de magia y misterio.", "Lucía Hernández", "135 mins", new DateTime(2024, 3, 23, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 20, 21, 15, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 14, 20, 30, 0, 0, DateTimeKind.Unspecified), "Comedia", "ruta imagen 7", "Carlos Sánchez, Marta Rivera, Daniel López", 20, 3, "La Tempestad", 4 },
+                    { 9, "El clásico musical inspirado en Romeo y Julieta, ambientado en Nueva York de los años 50.", "Roberto Álvarez", "160 mins", new DateTime(2024, 3, 19, 20, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 16, 21, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified), "Musical", "ruta imagen 7", "Ángela Ponce, Miguel Torres, Laura Jiménez", 25, 3, "West Side Story", 3 },
+                    { 10, "Un espectacular musical basado en la novela de Gaston Leroux.", "Sofía Martín", "150 mins", new DateTime(2024, 3, 21, 22, 45, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 4, 16, 22, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 28, 20, 30, 0, 0, DateTimeKind.Unspecified), "Drama", "ruta imagen 7", "Javier Gómez, Raquel del Pozo, Mario Casas", 30, 4, "Phantom of the Opera", 5 }
                 });
 
             migrationBuilder.InsertData(

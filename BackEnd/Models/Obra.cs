@@ -20,6 +20,19 @@ public class Obra
         public string Director {get; set;}
         [Required]
         public string Interpretes {get; set;}
+        [Required]
+        public DateTime Fecha {get;set;}
+        [Required]
+        public DateTime Fecha_Estreno_1 {get;set;}
+        [Required]
+        public DateTime Fecha_Estreno_2 {get;set;}
+
+        [Required]
+        public int Sala {get;set;}
+        [Required]
+        public int Valoracion {get;set;}
+        [Required]
+        public int Precio {get;set;}
         //public List<Sesion> Sesiones { get; set; }
 
         public List<AsientosObra> ListAsientosObra { get; set; }
