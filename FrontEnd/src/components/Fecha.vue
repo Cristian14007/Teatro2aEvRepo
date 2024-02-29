@@ -7,32 +7,26 @@
 <!-- Tercera fila con tres columnas -->
 <div class="row">
     <div class="col-4" id="obra-fecha" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        <!-- El fecha de la obra se mostrará aquí -->
+      {{ obra ? obra.fecha : 'Cargando...' }}
     </div>
-    <div class="col-4" id="obra-hora" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        <!-- El hora de la obra se mostrará aquí -->
-    </div>
+
     <!-- <RouterLink to="/reserva" class="btn" id="reserva-btn">Comprar entradas</RouterLink> -->
     <RouterLink :to="{ name: 'ReservaView', params: { obraId: obra?.obraId ?? 'defaultId' }}" class="btn" id="reserva-btn">Comprar entradas</RouterLink>
 </div>
 <!-- Tercera fila con tres columnas -->
 <div class="row">
     <div class="col-4" id="obra-fecha1" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        {{ obra ? obra.interpretes : 'Cargando...' }}
+      {{ obra ? obra.fecha_Estreno_1 : 'Cargando...' }}
     </div>
-    <div class="col-4" id="obra-hora1" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        <!-- El hora de la obra se mostrará aquí -->
-    </div>
+
     <a href="" type="submit" value="contact now" class="btn">Proximamente en venta</a>
 </div>
 <!-- Tercera fila con tres columnas -->
 <div class="row">
     <div class="col-4" id="obra-fecha2" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        <!-- El fecha de la obra se mostrará aquí -->
+      {{ obra ? obra.fecha_Estreno_2 : 'Cargando...' }}
     </div>
-    <div class="col-4" id="obra-hora2" style="border: 1px solid black; padding: 20px; text-align: center; font-size:200%;">   
-        <!-- El hora de la obra se mostrará aquí -->
-    </div>
+
     <a href="" type="submit" value="contact now" class="btn">Proximamente en venta</a>
 </div>
 
@@ -58,6 +52,12 @@ interface Obra {
   duracion: string;
   director: string;
   interpretes: string;
+  fecha: Date;
+  fecha_Estreno_1: Date;
+  fecha_Estreno_2: Date;
+  sala: number;
+  valoracion: number;
+  precio: number;
 }
 
 // Simula una función para cargar los datos de la obra basada en obraId
@@ -67,11 +67,26 @@ onMounted(async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch');
     }
-    obra.value = await response.json();
+    const data = await response.json();
+    data.fecha = data.fecha ? formatDate(data.fecha) : null;
+    data.fecha_Estreno_1 = data.fecha_Estreno_1 ? formatDate(data.fecha_Estreno_1) : null;
+    data.fecha_Estreno_2 = data.fecha_Estreno_2 ? formatDate(data.fecha_Estreno_2) : null;
+    obra.value = data;
   } catch (error) {
     console.error('Error:', error);
   }
 });
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${day}-${month}-${year} / ${hours}:${minutes}`;
+}
+
 </script>
   
   

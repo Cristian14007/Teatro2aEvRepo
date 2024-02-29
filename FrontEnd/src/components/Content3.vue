@@ -11,26 +11,22 @@
         <div class="row">
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Importe</div>
             <div class="col-6" id="obra-importe" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">
-                {{ obra ? obra.titulo : 'Cargando...' }} 
+                {{ obra ? obra.precio : 'Cargando...' }} 
             </div>
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Fecha 
             </div>
-            <div class="col-6"  id="obra-fecha" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> </div>
-        </div>
-        <!-- Primera fila con dos columnas -->
-        <div class="row">
-            <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Hora
-            </div>
-            <div class="col-6"  id="obra-hora" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> </div>
+            <div class="col-6"  id="obra-fecha" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> 
+              {{ obra ? obra.fecha : 'Cargando...' }} </div>
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Lugar de
                 Teatro</div>
-            <div class="col-6"  id="obra-sala" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> </div>
+            <div class="col-6"  id="obra-sala" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> 
+              {{ obra ? obra.sala : 'Cargando...' }} </div>
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
@@ -92,6 +88,9 @@ interface Obra {
   duracion: string;
   director: string;
   interpretes: string;
+  fecha: Date;
+  sala: number;
+  precio: number;
 }
 
 // Simula una función para cargar los datos de la obra basada en obraId
@@ -101,11 +100,23 @@ onMounted(async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch');
     }
-    obra.value = await response.json();
+    const data = await response.json();
+    data.fecha = data.fecha ? formatDate(data.fecha) : null;
+    obra.value = data;
   } catch (error) {
     console.error('Error:', error);
   }
 });
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${day}-${month}-${year} / ${hours}:${minutes}`;
+}
 </script>
   
   

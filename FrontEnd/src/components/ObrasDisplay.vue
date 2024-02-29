@@ -77,7 +77,7 @@ function removeFilter() {
   align-items: center;
   width: 100%;
   font-family: "Poppins", sans-serif;
-  margin-top: 15%;
+  margin: 3%;
   font-size: 100%;
 }
 
