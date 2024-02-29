@@ -38,18 +38,19 @@ public IActionResult Create(Obra obra)
     return CreatedAtAction(nameof(Get), new { id = obra.ObraId }, obra);
 }
 [HttpPut("{id}")]
-public IActionResult Update(int id, Obra obra)
+public IActionResult Update(int obraId, [FromBody] ObraUpdateDTO obraDTO)
 {
-    if (id != obra.ObraId)
-        return BadRequest();
-           
-    var existingObra = _obraService.Get(id);
-    if(existingObra is null)
-        return NotFound();
-   
-    _obraService.Update(obra);           
-   
-    return NoContent();
+    if (!ModelState.IsValid)  {return BadRequest(ModelState); } 
+
+        try
+        {
+            _obraService.Update(obraId, obraDTO);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+           return NotFound();
+        }
 }
 
     [HttpDelete("{id}")]

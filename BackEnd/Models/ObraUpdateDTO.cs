@@ -10,12 +10,20 @@ public class ObraUpdateDTO
 
     [Required]
     [StringLength(100, ErrorMessage = "La descripcion de la obra debe tener menos de 100 caracteres")]
-    public decimal Descripcion { get; set; }
+    public string Descripcion { get; set; }
 
     [Required]
-    public decimal Genero { get; set; }
+    public string Genero { get; set; }
 
     [Required]
-    public decimal Imagen { get; set; }
+    public string Interpretes {get; set;}
+
+    [Required]
+    public string Director {get; set;}
+
+    [Required]
+    public int Valoracion {get;set;}
+    [Required]
+    public int Precio {get;set;}
 }
 

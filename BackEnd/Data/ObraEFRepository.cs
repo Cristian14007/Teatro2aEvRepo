@@ -60,7 +60,8 @@ namespace BackEnd.Data
 
         public void Update(Obra obra)
         {
-            throw new NotImplementedException();
+            _context.Entry(obra).State = EntityState.Modified;
+            SaveChanges();
         }
 
         public void SaveChanges()
