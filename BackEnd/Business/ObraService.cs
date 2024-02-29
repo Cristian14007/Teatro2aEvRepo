@@ -36,9 +36,25 @@ namespace BackEnd.Business{
             return _obraRepository.GetAll();
         }
 
-        public void Update(Obra obra)
+        public void Update(int obraId, ObraUpdateDTO obraUpdate)
         {
+            //_obraRepository.Update(obra);
+            var obra = _obraRepository.Get(obraId);
+            if(obra == null)
+            {
+                throw new KeyNotFoundException($"Obra con Id {obraId} no encontrada.");
+            }
+
+            obra.Titulo = obraUpdate.Titulo;
+            obra.Descripcion = obraUpdate.Descripcion;
+            obra.Genero = obraUpdate.Genero;
+            obra.Interpretes = obraUpdate.Interpretes;
+            obra.Director = obraUpdate.Director;
+            obra.Valoracion = obraUpdate.Valoracion;
+            obra.Precio = obraUpdate.Precio;
+
             _obraRepository.Update(obra);
+            _obraRepository.SaveChanges();
         }
     }
 

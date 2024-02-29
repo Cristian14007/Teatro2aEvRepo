@@ -10,6 +10,6 @@ namespace BackEnd.Data
         void Update(Obra obra);
         void Delete (int id);
 
-
+        void SaveChanges();
     }
 }

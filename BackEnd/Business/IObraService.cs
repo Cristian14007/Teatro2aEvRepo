@@ -7,7 +7,7 @@ namespace BackEnd.Business
         List<Obra> GetAll();
         void Add(Obra obra);
         Obra Get(int id);
-        void Update(Obra obra);
+        public void Update(int obraId, ObraUpdateDTO obraUpdate);
         void Delete (int id);
 
 
