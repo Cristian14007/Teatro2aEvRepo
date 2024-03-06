@@ -7,6 +7,7 @@ import ReservaView from "../views/ReservaView.vue"
 import CompraView from "../views/CompraView.vue"
 import EntradaView from "../views/EntradaView.vue"
 import HomeView from "../views/HomeView.vue"
+import AdminView from "../views/AdminView.vue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -43,6 +44,11 @@ const router = createRouter({
             path: '/entrada/:obraId',
             name: 'EntradaView',
             component: EntradaView
+        },
+        {
+            path: '/admin',
+            name: 'AdminView',
+            component: AdminView
         },
         {
             path: '/about',

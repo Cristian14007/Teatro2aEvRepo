@@ -16,7 +16,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy  =>
                       {
-                          policy.WithOrigins("http://localhost:5173");
+                          policy.WithOrigins("http://localhost:5173")
+                                .AllowAnyMethod() // Esto permitirá todos los métodos, incluyendo DELETE
+                                .AllowAnyHeader();
                       });
 });
 
@@ -40,6 +42,9 @@ builder.Services.AddScoped<IngredienteService>(); */
 
 builder.Services.AddScoped<IObraService, ObraService>();
 builder.Services.AddScoped<IObraRepository, ObraEFRepository>();
+
+builder.Services.AddScoped<IAsientoService, AsientoService>();
+builder.Services.AddScoped<IAsientoRepository, AsientoEFRepository>();
 
 //var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");

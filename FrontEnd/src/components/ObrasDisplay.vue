@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, onMounted ,computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import Card from '../components/Card.vue'
 interface Obra {
   obraId: number;
@@ -13,6 +13,7 @@ interface Obra {
 
 const obras = ref<Obra[]>([]);
 const categoriaSeleccionada = ref('');
+const terminoBusqueda = ref('');
 
 onMounted(async () => {
   try {
@@ -25,15 +26,21 @@ onMounted(async () => {
   }
 });
 
-const obrasFiltradasPorCategoria = computed(() => {
-  if (!categoriaSeleccionada.value) {
-    return obras.value;
-  }
-  return obras.value.filter(obra => obra.genero === categoriaSeleccionada.value);
+const obrasFiltradas = computed(() => {
+  return obras.value
+    .filter(obra => {
+      // Filtrar por categoría
+      return categoriaSeleccionada.value ? obra.genero === categoriaSeleccionada.value : true;
+    })
+    .filter(obra => {
+      // Filtrar por término de búsqueda
+      return obra.titulo.toLowerCase().includes(terminoBusqueda.value.toLowerCase());
+    });
 });
 
 function removeFilter() {
   categoriaSeleccionada.value = '';
+  terminoBusqueda.value = '';
 }
 </script>
 
@@ -41,7 +48,7 @@ function removeFilter() {
   <section class="filter" id="filter">
     <div class="filters">
       <label>Filtro: &nbsp;</label>
-      <select class="select"  name="select">
+      <select class="select" name="select">
         <!-- Opciones de filtro (puedes implementar esta lógica más adelante) -->
       </select>
 
@@ -53,23 +60,30 @@ function removeFilter() {
         <option value="Tragedia">Tragedia</option>
         <option value="Comedia">Comedia</option>
       </select>
+      <label>Busqueda: &nbsp;</label>
+      <input type="text" v-model="terminoBusqueda" placeholder="Buscar obra" class="filtro-input">
       <span @click="removeFilter" id="removeFilter" class="fas fa-times"></span>
     </div>
   </section>
 
   <div class="container">
-    <Card v-for="obra in obrasFiltradasPorCategoria" :key="obra.obraId" :obra="obra" />
+    <Card v-for="obra in obrasFiltradas" :key="obra.obraId" :obra="obra" />
+
   </div>
 </template>
 
-  <style scoped>
-  .container {
-    display: flex;
-    flex-wrap: wrap; /* Esto permite que las tarjetas pasen a la siguiente línea si no hay espacio */
-    justify-content: space-around; /* Ajusta el espacio entre las tarjetas */
-    gap: 20px; /* Espacio entre las tarjetas */
-  }
-  .filters {
+<style scoped>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Esto permite que las tarjetas pasen a la siguiente línea si no hay espacio */
+  justify-content: space-around;
+  /* Ajusta el espacio entre las tarjetas */
+  gap: 20px;
+  /* Espacio entre las tarjetas */
+}
+
+.filters {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -102,4 +116,10 @@ function removeFilter() {
   transform: scale(1.1);
   color: rgb(233, 32, 32);
 }
-  </style>
+.filtro-input {
+  width: 25%; 
+  height: 35px; 
+  margin-right: 1%; 
+  padding: 0 10px; 
+}
+</style>
