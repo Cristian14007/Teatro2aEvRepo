@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 public class AsientosObra
 {
-    [Key]
+    /* [Key]
     public int Asiento_Obra_Id { get; set; }
     [Required]
     public bool Reservado { get; set; }
@@ -26,7 +26,7 @@ public class AsientosObra
         AsientoId = asientoId;
         ObraId = obraId;
          
-    }
+    } */
 
     
 }

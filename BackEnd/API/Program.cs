@@ -41,6 +41,9 @@ builder.Services.AddScoped<IngredienteService>(); */
 builder.Services.AddScoped<IObraService, ObraService>();
 builder.Services.AddScoped<IObraRepository, ObraEFRepository>();
 
+builder.Services.AddScoped<IAsientoService, AsientoService>();
+builder.Services.AddScoped<IAsientoRepository, AsientoEFRepository>();
+
 //var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 

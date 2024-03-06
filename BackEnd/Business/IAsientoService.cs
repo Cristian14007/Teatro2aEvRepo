@@ -3,11 +3,11 @@ namespace BackEnd.Business;
 
 public interface IAsientoService
 {
-    List<AsientosObra> GetAll();
+    List<Asiento> GetAll();
     // GetAll(int id);
-    void Add(AsientosObra Asientos);
-    AsientosObra GetAsiento(int idFunction, int idAsiento);
-    List<AsientosObra> GetFromFunction(int idFunction);
-    void Update(AsientosObra Asientos);
-    void Delete(int idFunction, int idAsiento);
+    void Add(Asiento asiento);
+    Asiento Get(int id);
+    //List<Asiento> GetFromFunction(int idFunction);
+    public void Update(int asientoId, AsientoUpdateDTO asientoUpdate);
+    void Delete(int id);
 }

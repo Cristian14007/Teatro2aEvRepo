@@ -39,23 +39,7 @@ namespace BackEnd.Data
         {
 
             return _context.Obras.ToList();
-            /* var pizzas = _context.Pizzas
-        .Include(p => p.PizzaIngredientes)
-            .ThenInclude(pi => pi.Ingrediente)
-        .ToList();
-
-    var pizzasDTO = pizzas.Select(p => new PizzaDTO
-    {
-        PizzaId = p.PizzaId,
-        Nombre = p.Nombre,
-        Ingredientes = p.PizzaIngredientes.Select(pi => new IngredienteDTO
-        {
-            IngredienteId = pi.Ingrediente.IngredienteId,
-            Nombre = pi.Ingrediente.Nombre
-        }).ToList()
-    }).ToList();
-
-    return pizzasDTO; */
+            
         }
 
         public void Update(Obra obra)
