@@ -42,6 +42,24 @@ public class Obra
     public Obra (){
 
     }
+     public Obra(string titulo, string descripcion,string director,string interpretes, DateTime fecha,DateTime fecha_Estreno_1,DateTime fecha_Estreno_2, string imagen, string genero, string duracion, int precio)
+    {
+        Titulo = titulo;
+        Imagen = imagen;
+        Descripcion = descripcion;
+        Genero = genero;
+        Duracion = duracion;
+        Director = director;
+        Interpretes = interpretes;
+        Fecha = fecha;
+        Fecha_Estreno_1 = fecha_Estreno_1;
+        Fecha_Estreno_2 = fecha_Estreno_2;
+        
+        Precio = precio;
+       
+
+
+    }
 
     
 

@@ -30,6 +30,22 @@ namespace BackEnd.Data{
             return asientos;
         }
 
+        public List<Asiento> CrearAsientos()
+        {
+            List<Asiento> Asientos = new List<Asiento>();
+
+            for (int i = 1; i <= 100; i++)
+            {
+                Asientos.Add(new Asiento
+                {
+                    AsientoId = i,
+                });
+            }
+
+            return Asientos;
+
+        }
+
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,7 +108,7 @@ modelBuilder.Entity<Asiento>().HasData(
 );
 
 modelBuilder.Entity<AsientosObra>().HasData(
-                CreateAsientosObra(1).ToList() // Crea una nueva butaca con ButacaId = 1 y Reservado = false
+                CreateAsientosObra(1).ToList() // Crea una nueva Asiento con AsientoId = 1 y Reservado = false
             );
 
 
