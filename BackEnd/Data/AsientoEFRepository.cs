@@ -20,60 +20,44 @@ namespace BackEnd.Data
             _context = context;
         }
 
-        public List<AsientosObra> GetAll()
+        public List<Asiento> GetAll()
         {
-            return _context.AsientosObras.ToList();
-            // var pizzas = _context.Pizzas
-            //     .Include(p => p.PizzaIngredientes)
-            //         .ThenInclude(pi => pi.Ingrediente)
-            //     .ToList();
-
-            // var pizzasDto = pizzas.Select(p => new PizzaDto
-            // {
-            //     Id = p.Id,
-            //     Name = p.Name,
-            //     PizzaIngredientes = p.PizzaIngredientes.Select(pi => new IngredienteDto
-            //     {
-            //         Id = pi.Ingrediente.Id,
-            //         Name = pi.Ingrediente.Name
-            //     }).ToList()
-            // }).ToList();
-
-            // return pizzasDto;
+            return _context.Asientos.ToList();
+            
         }
 
-        public void Add(AsientosObra Asiento)
+        public void Add(Asiento asiento)
         {
-            _context.AsientosObras.Add(Asiento);
+            _context.Asientos.Add(asiento);
             SaveChanges();
         }
 
-        public AsientosObra GetAsiento(int idFunction, int idAsiento)
+        public Asiento Get(int id)
         {
-            return _context.AsientosObras.FirstOrDefault(obra => obra.ObraId == idFunction && obra.AsientoId == idAsiento);
+            return _context.Asientos.FirstOrDefault(asiento => asiento.AsientoId == id);
         }
 
-        public List<AsientosObra> GetFromFunction(int idFunction)
+        /* public List<Asiento> GetFromFunction(int idFunction)
         {
             return _context.AsientosObras.Where(obra => obra.ObraId == idFunction).ToList();
 
-        }
+        } */
 
 
-        public void Update(AsientosObra Asiento)
+        public void Update(Asiento asiento)
         {
-            _context.Entry(Asiento).State = EntityState.Modified;
+            _context.Entry(asiento).State = EntityState.Modified;
             SaveChanges();
         }
 
-        public void Delete(int idFunction, int idAsiento)
+        public void Delete(int id)
         {
-            var Asiento = GetAsiento(idFunction, idAsiento);
-            if (Asiento is null)
+            var asiento = Get(id);
+            if (asiento != null)
             {
-                throw new KeyNotFoundException("Pizza not found.");
+                _context.Remove(asiento);
             }
-            _context.AsientosObras.Remove(Asiento);
+
             SaveChanges();
         }
 

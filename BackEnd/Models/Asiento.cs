@@ -10,16 +10,23 @@ public class Asiento
     [Required]
     public bool Reservado { get; set; }
 
-        public List<AsientosObra> ListAsientosObra { get; set; }
+    [ForeignKey ("Obra")]
+    public int ObraId {get; set;}
+
+    public Obra Obra {get; set;}
+
+    public int Num_Asiento {get; set;}
 
 
 
     
     public Asiento() { }
-    public Asiento(int asientoId, bool reservado)
+    public Asiento(int asientoId, bool reservado, int obraId, int num_Asiento)
     {
         Reservado = reservado;
         AsientoId = asientoId;
+        ObraId = obraId;
+        Num_Asiento = num_Asiento;
         
     }
 

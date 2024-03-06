@@ -35,7 +35,7 @@ public class Obra
         public int Precio {get;set;}
         //public List<Sesion> Sesiones { get; set; }
 
-        public List<AsientosObra> ListAsientosObra { get; set; }
+        public List<Asiento> Asientos { get; set; }
 
     
 

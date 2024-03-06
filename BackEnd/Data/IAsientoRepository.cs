@@ -3,11 +3,13 @@ namespace BackEnd.Data;
 
 public interface IAsientoRepository
 {
-    List<AsientosObra> GetAll();
-    // GetAll(int id);
-    void Add(AsientosObra Asientos);
-    AsientosObra GetAsiento(int idFunction, int idAsiento);
-    List<AsientosObra> GetFromFunction(int idFunction);
-    void Update(AsientosObra Asientos);
-    void Delete(int idFunction, int idAsiento);
+    List<Asiento> GetAll();
+    
+    void Add(Asiento asiento);
+    Asiento Get(int id);
+    //List<Asiento> GetFromFunction(int idObra, int num_asiento);
+    void Update(Asiento asiento);
+    void Delete(int id);
+
+    void SaveChanges();
 }

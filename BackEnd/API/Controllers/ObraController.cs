@@ -38,13 +38,13 @@ public IActionResult Create(Obra obra)
     return CreatedAtAction(nameof(Get), new { id = obra.ObraId }, obra);
 }
 [HttpPut("{id}")]
-public IActionResult Update(int obraId, [FromBody] ObraUpdateDTO obraDTO)
+public IActionResult Update(int obraId, [FromBody] ObraUpdateDTO obraUpdateDTO)
 {
     if (!ModelState.IsValid)  {return BadRequest(ModelState); } 
 
         try
         {
-            _obraService.Update(obraId, obraDTO);
+            _obraService.Update(obraId, obraUpdateDTO);
             return NoContent();
         }
         catch (KeyNotFoundException)

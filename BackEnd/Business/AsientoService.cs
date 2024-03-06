@@ -8,68 +8,63 @@ namespace BackEnd.Business
     public class AsientoService : IAsientoService
     {
 
-        private readonly IAsientoRepository _AsientoRepository;
+        private readonly IAsientoRepository _asientoRepository;
         
 
-        public AsientoService(IAsientoRepository AsientoRepository){
-            _AsientoRepository = AsientoRepository;
+        public AsientoService(IAsientoRepository asientoRepository){
+            _asientoRepository = asientoRepository;
         
         }
-        public  List<AsientosObra> GetAll()
+        public  List<Asiento> GetAll()
         {
-            var Asientos = _AsientoRepository.GetAll();
-            // foreach (var pizza in pizzas)
-            // {
-            //     pizza.Ingredientes = _ingredientesRepository.GetIngredientesByPizzaId(pizza.Id);
-            // }
-            return Asientos;
+            var asientos = _asientoRepository.GetAll();
+            
+            return _asientoRepository.GetAll();
         }
 
-        public  AsientosObra GetAsiento(int idFunction, int idAsiento)
+        public  Asiento Get(int id)
         {
-            var Asiento = _AsientoRepository.GetAsiento(idFunction, idAsiento);
+            var asiento = _asientoRepository.Get(id);
 
-            // if (pizza != null)
-            // {
-            //     pizza.Ingredientes = _ingredientesRepository.GetIngredientesByPizzaId(pizza.Id);
-            // }
-
-            return Asiento;
+            return asiento;
         }
 
-        public  List<AsientosObra> GetFromFunction(int idFunction)
+        /* public  List<AsientosObra> GetFromFunction(int idFunction)
         {
             var Asiento = _AsientoRepository.GetFromFunction(idFunction);
 
-            // if (pizza != null)
-            // {
-            //     pizza.Ingredientes = _ingredientesRepository.GetIngredientesByPizzaId(pizza.Id);
-            // }
 
             return Asiento;
-        }
+        } */
           
 
-    public  void Add(AsientosObra Asiento)
+    public  void Add(Asiento asiento)
     {
-        _AsientoRepository.Add(Asiento);
+        _asientoRepository.Add(asiento);
 
-            // foreach (var ingrediente in pizza.Ingredientes)
-            // {
-            //     _ingredientesRepository.AddIngredienteToPizza(ingrediente, pizza.Id);
-            // }
     }
 
-    public  void Update(AsientosObra Asiento)
+    public  void Update(int asientoId, AsientoUpdateDTO asientoUpdate)
     {
-        _AsientoRepository.Update(Asiento);
+        
+            var asiento = _asientoRepository.Get(asientoId);
+            if(asiento == null)
+            {
+                throw new KeyNotFoundException($"Asiento con Id {asientoId} no encontrado.");
+            }
 
-            // _ingredientesRepository.UpdateIngredientesForPizza(pizza.Ingredientes, pizza.Id);
+            asiento.Reservado = asientoUpdate.Reservado;
+            
+
+            _asientoRepository.Update(asiento);
+            _asientoRepository.SaveChanges();
+
+            
     }
 
-    public  void Delete(int idFunction, int idAsiento)
+    public  void Delete(int id)
     {
-        _AsientoRepository.Delete(idFunction, idAsiento);
+        _asientoRepository.Delete(id);
     }
 }
 

@@ -9,19 +9,19 @@ namespace BackEnd.Controllers;
 [Route("[controller]")]
 public class AsientoController : ControllerBase
 {
-    private readonly IAsientoService _AsientoService;
-    public AsientoController(IAsientoService AsientoService)
+    private readonly IAsientoService _asientoService;
+    public AsientoController(IAsientoService asientoService)
     {
-        _AsientoService = AsientoService;
+        _asientoService = asientoService;
     }
 
     [HttpGet]
-    public ActionResult<List<AsientosObra>> GetAll() =>
-    _AsientoService.GetAll();
+    public ActionResult<List<Asiento>> GetAll() =>
+    _asientoService.GetAll();
 
 
    // PILLAR SOLO 1 Asientos
-    [HttpGet]
+    /* [HttpGet]
     [Route("{idFunction}/{idAsiento}")]
     public ActionResult<AsientosObra> GetAsiento(int idFunction, int idAsiento)
     {
@@ -32,10 +32,10 @@ public class AsientoController : ControllerBase
         }else{
             return Asiento;
         }
-    }
+    } */
 
    // PILLAR TODAS LAS AsientosS DE 1 FUNCION
-    [HttpGet]
+    /* [HttpGet]
     [Route("{id}")]
     public ActionResult<List<AsientosObra>> GetFromFunction(int id)
     {
@@ -46,49 +46,56 @@ public class AsientoController : ControllerBase
         }else{
             return Asiento;
         }
-    }
+    } */
 
+    [HttpGet]
+    [Route("{id}")]
+public ActionResult<Asiento> Get(int id)
+{
+    var asiento = _asientoService.Get(id);
 
+    if(asiento == null)
+        return NotFound();
+
+    return asiento;
+}
 
 
     [HttpPost]
-    public IActionResult Create(AsientosObra Asiento)
+    public IActionResult Create(Asiento asiento)
     {
-        _AsientoService.Add(Asiento);
-        return CreatedAtAction(nameof(GetAsiento), new { id = Asiento.ObraId }, Asiento);
+        _asientoService.Add(asiento);
+        return CreatedAtAction(nameof(Get), new { id = asiento.AsientoId }, asiento);
     }
 
+[HttpPut("{id}")]
+public IActionResult Update(int asientoId, [FromBody] AsientoUpdateDTO asientoUpdateDTO)
+{
+    if (!ModelState.IsValid)  {return BadRequest(ModelState); } 
 
- 
-
-    [HttpPut("{idFunction}/{idAsiento}")]
-    public IActionResult Update(int idFunction, int idAsiento, AsientosObra Asiento)
-    {
-        if (idFunction != Asiento.ObraId)
-            return BadRequest();
-
-        var existingObra = _AsientoService.GetAsiento(idFunction, idAsiento);
-        if (existingObra is null)
-            return NotFound();
-
-        _AsientoService.Update(Asiento);
-
-        return NoContent();
-    }
+        try
+        {
+            _asientoService.Update(asientoId, asientoUpdateDTO);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+           return NotFound();
+        }
+}
 
 
 
-
-    [HttpDelete("{idFunction}/{idAsiento}")]
-    public IActionResult Delete(int idFunction, int idAsiento)
-    {
-        var obra = _AsientoService.GetAsiento(idFunction, idAsiento);
-
-        if (obra is null)
-            return NotFound();
-
-        _AsientoService.Delete(idFunction, idAsiento);
-
-        return NoContent();
-    }
+     [HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    var asiento = _asientoService.Get(id);
+   
+    if (asiento is null)
+        return NotFound();
+       
+    _asientoService.Delete(id);
+   
+    return NoContent();
+}
 }
