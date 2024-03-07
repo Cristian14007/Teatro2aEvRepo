@@ -16,12 +16,12 @@ public class ObraController : ControllerBase
     }
 
     [HttpGet]
-public ActionResult<List<Obra>> GetAll() =>
+public ActionResult<List<ObraGetDTO>> GetAll() =>
     _obraService.GetAll();
 
     [HttpGet]
     [Route("{id}")]
-public ActionResult<Obra> Get(int id)
+public ActionResult<ObraGetDTO> Get(int id)
 {
     var obra = _obraService.Get(id);
 

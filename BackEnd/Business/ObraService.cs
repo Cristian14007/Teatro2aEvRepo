@@ -22,18 +22,25 @@ namespace BackEnd.Business{
             _obraRepository.Delete(id);
         }
 
-        public Obra Get(int id)
+        public ObraGetDTO Get(int id)
         {
             var obra = _obraRepository.Get(id);
 
             return obra;
         }
 
-        public List<Obra> GetAll()
+        /* public ObraGetDTO GetDTO(int id){
+            
+            var obra = _obraRepository.GetDTO(id);
+
+            return obra;
+        } */
+
+        public List<ObraGetDTO> GetAll()
         {
             var obras = _obraRepository.GetAll();
 
-            return _obraRepository.GetAll();
+            return obras;
         }
 
         public void Update(int obraId, ObraUpdateDTO obraUpdate)

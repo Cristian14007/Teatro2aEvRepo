@@ -30,19 +30,79 @@ namespace BackEnd.Data
 
         }
 
-        public Obra Get(int id)
+        public ObraGetDTO Get(int id)
         {
-            return _context.Obras.FirstOrDefault(o => o.ObraId == id);
-        }
-
-        public List<Obra> GetAll()
-        {
-
-            return _context.Obras.ToList();
             
+            var obras = _context.Obras
+                .Include(o => o.Asientos)
+                .ToList();
+
+            var obrasDTO = obras.Select(o => new ObraGetDTO
+            {
+                ObraId = o.ObraId,
+                Titulo = o.Titulo,
+                Asientos = o.Asientos.Select(a => new AsientoGetDTO
+                {
+                    AsientoId = a.AsientoId,
+                    Reservado = a.Reservado
+
+                }).ToList()
+            }).FirstOrDefault(o => o.ObraId == id);
+
+            return obrasDTO;
         }
 
-        public void Update(Obra obra)
+        /* public ObraGetDTO GetDTO(int id){
+
+            var obras = _context.Obras
+                .Include(o => o.Asientos)
+                .ToList();
+
+            var obrasDTO = obras.Select(o => new ObraGetDTO
+            {
+                ObraId = o.ObraId,
+                Titulo = o.Titulo,
+                Asientos = o.Asientos.Select(a => new AsientoGetDTO
+                {
+                    AsientoId = a.AsientoId,
+                    Reservado = a.Reservado
+
+                }).ToList()
+            }).FirstOrDefault(o => o.ObraId == id);
+
+            return obrasDTO;
+        } */
+
+        public List<ObraGetDTO> GetAll()
+        {
+
+            //return _context.Obras.ToList();
+            var obras = _context.Obras
+                .Include(o => o.Asientos)
+                .ToList();
+
+            var obrasDTO = obras.Select(o => new ObraGetDTO
+            {
+                ObraId = o.ObraId,
+                Titulo = o.Titulo,
+                Genero = o.Genero,
+                Interpretes = o.Interpretes,
+                Director = o.Director,
+                Valoracion = o.Valoracion,
+                Precio = o.Precio,
+                Asientos = o.Asientos.Select(a => new AsientoGetDTO
+                {
+                    AsientoId = a.AsientoId,
+                    Reservado = a.Reservado,
+                    Num_Asiento = a.Num_Asiento
+
+                }).ToList()
+            }).ToList();
+
+            return obrasDTO;
+        }
+
+        public void Update(ObraGetDTO obra)
         {
             _context.Entry(obra).State = EntityState.Modified;
             SaveChanges();
@@ -52,6 +112,8 @@ namespace BackEnd.Data
         {
             _context.SaveChanges();
         }
+
+        
     }
 
 }
