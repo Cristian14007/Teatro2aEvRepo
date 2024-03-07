@@ -53,8 +53,7 @@ public class Obra
         Interpretes = interpretes;
         Fecha = fecha;
         Fecha_Estreno_1 = fecha_Estreno_1;
-        Fecha_Estreno_2 = fecha_Estreno_2;
-        
+        Fecha_Estreno_2 = fecha_Estreno_2;     
         Precio = precio;
        
 

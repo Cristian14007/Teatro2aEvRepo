@@ -54,6 +54,8 @@ namespace BackEnd.Data{
             .HasMany(o => o.Asientos)
             .WithOne(a => a.Obra)
             .HasForeignKey(a => a.ObraId);
+
+            
             
 modelBuilder.Entity<Obra>().HasData(
 new Obra { ObraId = 1, Titulo = "Hamlet", Descripcion = "Una obra de Shakespeare.", Genero = "Drama", Imagen = "ruta imagen 1", Duracion = "120 mins", Director = "Andres Torres", Interpretes = "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía", Fecha = new DateTime(2024, 03, 20, 20, 0, 0), Fecha_Estreno_1 = new DateTime(2024, 04, 08, 21, 0, 0), Fecha_Estreno_2 = new DateTime(2024, 05, 05, 22, 30, 0), Sala = 1, Valoracion = 4, Precio = 30},
