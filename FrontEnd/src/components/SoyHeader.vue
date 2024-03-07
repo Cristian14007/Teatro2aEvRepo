@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import logo from '../components/logo.vue'
 
 </script>
 
@@ -12,7 +13,8 @@ import { RouterLink, RouterView } from 'vue-router';
 
 <header class="header">
     <a href="">
-      <img src="../assets/logo3.png" alt="" width="50">
+      <!-- <img src="../assets/logo3.png" alt="" width="50"> -->
+      <router-link to="/"><logo></logo></router-link>
     </a>
 
     <nav class="navbar-header">

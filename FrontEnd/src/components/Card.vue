@@ -5,7 +5,8 @@ import { RouterLink } from 'vue-router';
 
 <template>
   <div class="card">
-    <img :src="obra.imagen" :alt="obra.titulo" />
+    <!-- <img :src="obra.imagen" :alt="obra.titulo" /> -->
+    <img src="@/assets/hamlet.jpg" alt="Hamlet" width="150" height="150">
     <h3>{{ obra.titulo }}</h3>
     <RouterLink :to="{ name: 'HorarioView', params: { obraId: obra.obraId }}" class="btn" id="cartebtn">Comprar entradas</RouterLink>
     </div>
@@ -14,13 +15,15 @@ import { RouterLink } from 'vue-router';
 <style scoped>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
   width: 25%;
   border-radius: 5px;
+  border: 1px solid transparent; 
 }
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border-color: #F0D303;
+  border-width: 5px; 
 }
 
 img {

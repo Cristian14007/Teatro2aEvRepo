@@ -8,12 +8,14 @@ interface Obra {
   imagen: string;
   descripcion: string;
   genero: string;
-  sesiones: any; // Cambia 'any' por un tipo más específico si es necesario
+  valoracion: number;
+  precio: number;
 }
 
 const obras = ref<Obra[]>([]);
 const categoriaSeleccionada = ref('');
 const terminoBusqueda = ref('');
+const opcionOrdenacion = ref('');
 
 onMounted(async () => {
   try {
@@ -26,21 +28,34 @@ onMounted(async () => {
   }
 });
 
-const obrasFiltradas = computed(() => {
-  return obras.value
+const obrasFiltradasYOrdenadas = computed(() => {
+  let obrasFiltradas = obras.value
     .filter(obra => {
-      // Filtrar por categoría
       return categoriaSeleccionada.value ? obra.genero === categoriaSeleccionada.value : true;
     })
     .filter(obra => {
-      // Filtrar por término de búsqueda
       return obra.titulo.toLowerCase().includes(terminoBusqueda.value.toLowerCase());
     });
+
+  switch (opcionOrdenacion.value) {
+    case 'valoracionDesc':
+      return obrasFiltradas.sort((a, b) => b.valoracion - a.valoracion);
+    case 'precioDesc':
+      return obrasFiltradas.sort((a, b) => b.precio - a.precio);
+    case 'valoracionAsc':
+      return obrasFiltradas.sort((a, b) => a.valoracion - b.valoracion);
+    case 'precioAsc':
+      return obrasFiltradas.sort((a, b) => a.precio - b.precio);
+    default:
+      return obrasFiltradas;
+  }
 });
+
 
 function removeFilter() {
   categoriaSeleccionada.value = '';
   terminoBusqueda.value = '';
+  opcionOrdenacion.value = '';
 }
 </script>
 
@@ -48,10 +63,13 @@ function removeFilter() {
   <section class="filter" id="filter">
     <div class="filters">
       <label>Filtro: &nbsp;</label>
-      <select class="select" name="select">
-        <!-- Opciones de filtro (puedes implementar esta lógica más adelante) -->
+      <select class="select" v-model="opcionOrdenacion" name="selectOrdenacion">
+        <option value="">Sin Ordenar</option>
+        <option value="valoracionDesc">Mayor Valoración</option>
+        <option value="precioDesc">Mayor Precio</option>
+        <option value="valoracionAsc">Menor Valoración</option>
+        <option value="precioAsc">Menor Precio</option>
       </select>
-
       <label>Categoría: &nbsp;</label>
       <select class="select" v-model="categoriaSeleccionada" name="select2">
         <option value="">No Filtro</option>
@@ -67,7 +85,7 @@ function removeFilter() {
   </section>
 
   <div class="container">
-    <Card v-for="obra in obrasFiltradas" :key="obra.obraId" :obra="obra" />
+    <Card v-for="obra in obrasFiltradasYOrdenadas" :key="obra.obraId" :obra="obra" />
 
   </div>
 </template>
@@ -116,10 +134,11 @@ function removeFilter() {
   transform: scale(1.1);
   color: rgb(233, 32, 32);
 }
+
 .filtro-input {
-  width: 25%; 
-  height: 35px; 
-  margin-right: 1%; 
-  padding: 0 10px; 
+  width: 25%;
+  height: 35px;
+  margin-right: 1%;
+  padding: 0 10px;
 }
 </style>
