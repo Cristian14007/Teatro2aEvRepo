@@ -16,7 +16,7 @@ public class AsientoController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Asiento>> GetAll() =>
+    public ActionResult<List<AsientoGetDTO>> GetAll() =>
     _asientoService.GetAll();
 
 

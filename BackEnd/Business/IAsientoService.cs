@@ -3,7 +3,7 @@ namespace BackEnd.Business;
 
 public interface IAsientoService
 {
-    List<Asiento> GetAll();
+    List<AsientoGetDTO> GetAll();
     // GetAll(int id);
     void Add(Asiento asiento);
     Asiento Get(int id);

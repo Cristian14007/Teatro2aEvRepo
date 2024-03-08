@@ -15,7 +15,7 @@ namespace BackEnd.Business
             _asientoRepository = asientoRepository;
         
         }
-        public  List<Asiento> GetAll()
+        public  List<AsientoGetDTO> GetAll()
         {
             var asientos = _asientoRepository.GetAll();
             

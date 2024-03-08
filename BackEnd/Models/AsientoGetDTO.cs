@@ -14,7 +14,7 @@ public class AsientoGetDTO
     public int Num_Asiento { get; set; }
 
     
-    public Obra Obra { get; set; }
+    public int ObraId { get; set; }
     
     public AsientoGetDTO() { }
     

@@ -20,11 +20,26 @@ namespace BackEnd.Data
             _context = context;
         }
 
-        public List<Asiento> GetAll()
+        /* public List<Asiento> GetAll()
         {
             return _context.Asientos.ToList();
             
-        }
+        } */
+
+        public List<AsientoGetDTO> GetAll()
+{
+    var asientos = _context.Asientos.ToList();
+
+    var asientosDTO = asientos.Select(a => new AsientoGetDTO
+    {
+        AsientoId = a.AsientoId,
+        Reservado = a.Reservado,
+        Num_Asiento = a.Num_Asiento,
+        ObraId = a.ObraId
+    }).ToList();
+
+    return asientosDTO;
+}
 
         public void Add(Asiento asiento)
         {

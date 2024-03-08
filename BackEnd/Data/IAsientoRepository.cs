@@ -3,7 +3,7 @@ namespace BackEnd.Data;
 
 public interface IAsientoRepository
 {
-    List<Asiento> GetAll();
+    List<AsientoGetDTO> GetAll();
     
     void Add(Asiento asiento);
     Asiento Get(int id);

@@ -41,10 +41,18 @@ namespace BackEnd.Data
             {
                 ObraId = o.ObraId,
                 Titulo = o.Titulo,
+                Descripcion = o.Descripcion,
+                Genero = o.Genero,
+                Interpretes = o.Interpretes,
+                Director = o.Director,
+                Valoracion = o.Valoracion,
+                Precio = o.Precio,
                 Asientos = o.Asientos.Select(a => new AsientoGetDTO
                 {
                     AsientoId = a.AsientoId,
-                    Reservado = a.Reservado
+                    Reservado = a.Reservado,
+                    Num_Asiento = a.Num_Asiento,
+                    ObraId = a.ObraId
 
                 }).ToList()
             }).FirstOrDefault(o => o.ObraId == id);
@@ -85,6 +93,7 @@ namespace BackEnd.Data
             {
                 ObraId = o.ObraId,
                 Titulo = o.Titulo,
+                Descripcion = o.Descripcion,
                 Genero = o.Genero,
                 Interpretes = o.Interpretes,
                 Director = o.Director,
@@ -94,7 +103,8 @@ namespace BackEnd.Data
                 {
                     AsientoId = a.AsientoId,
                     Reservado = a.Reservado,
-                    Num_Asiento = a.Num_Asiento
+                    Num_Asiento = a.Num_Asiento,
+                    ObraId = a.ObraId
 
                 }).ToList()
             }).ToList();
