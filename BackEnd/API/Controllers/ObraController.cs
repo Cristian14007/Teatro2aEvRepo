@@ -37,14 +37,15 @@ public IActionResult Create(Obra obra)
     _obraService.Add(obra);
     return CreatedAtAction(nameof(Get), new { id = obra.ObraId }, obra);
 }
+
 [HttpPut("{id}")]
-public IActionResult Update(int obraId, [FromBody] ObraUpdateDTO obraUpdateDTO)
+public IActionResult Update(int id, [FromBody] ObraUpdateDTO obraUpdateDTO)
 {
     if (!ModelState.IsValid)  {return BadRequest(ModelState); } 
 
         try
         {
-            _obraService.Update(obraId, obraUpdateDTO);
+            _obraService.Update(id, obraUpdateDTO);
             return NoContent();
         }
         catch (KeyNotFoundException)

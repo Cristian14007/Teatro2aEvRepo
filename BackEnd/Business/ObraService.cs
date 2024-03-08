@@ -43,15 +43,16 @@ namespace BackEnd.Business{
             return obras;
         }
 
-        public void Update(int obraId, ObraUpdateDTO obraUpdate)
+        public void Update(int id, ObraUpdateDTO obraUpdate)
         {
             //_obraRepository.Update(obra);
-            var obra = _obraRepository.Get(obraId);
-            if(obra == null)
+            var obraDTO = _obraRepository.Get(id);
+            if(obraDTO == null)
             {
-                throw new KeyNotFoundException($"Obra con Id {obraId} no encontrada.");
+                throw new KeyNotFoundException($"Obra con Id {id} no encontrada.");
             }
 
+            var obra = obraDTO.ToObra();
             obra.Titulo = obraUpdate.Titulo;
             obra.Descripcion = obraUpdate.Descripcion;
             obra.Genero = obraUpdate.Genero;
@@ -59,9 +60,10 @@ namespace BackEnd.Business{
             obra.Director = obraUpdate.Director;
             obra.Valoracion = obraUpdate.Valoracion;
             obra.Precio = obraUpdate.Precio;
+            obra.Duracion = obraUpdate.Duracion;
 
             _obraRepository.Update(obra);
-            _obraRepository.SaveChanges();
+            //_obraRepository.SaveChanges();
         }
     }
 

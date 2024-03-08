@@ -9,7 +9,7 @@ namespace BackEnd.Business
         ObraGetDTO Get(int id);
 
         /* ObraGetDTO GetDTO(int id); */
-        public void Update(int obraId, ObraUpdateDTO obraUpdate);
+        public void Update(int id, ObraUpdateDTO obraUpdate);
         void Delete (int id);
 
 

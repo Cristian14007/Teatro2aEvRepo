@@ -10,7 +10,7 @@ namespace BackEnd.Data
         ObraGetDTO Get(int id);
 
         /* ObraGetDTO GetDTO(int id); */
-        void Update(ObraGetDTO obra);
+        void Update(Obra obra);
         void Delete (int id);
 
         void SaveChanges();

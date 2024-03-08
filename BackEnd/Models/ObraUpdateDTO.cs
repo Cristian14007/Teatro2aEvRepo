@@ -25,5 +25,8 @@ public class ObraUpdateDTO
     public int Valoracion {get;set;}
     [Required]
     public int Precio {get;set;}
+
+    [Required]
+    public string Duracion {get;set;}
 }
 
