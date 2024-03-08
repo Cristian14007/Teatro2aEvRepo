@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import obras from "../App.vue"
 import Card from '../components/Card.vue'
-import ObrasDisplay from "../components/ObrasDisplay.vue"
+import EstrenosDisplay from "../components/EstrenosDisplay.vue"
 import AboutSlider from "../components/AboutSlider.vue"
 </script>
 
@@ -20,9 +20,9 @@ import AboutSlider from "../components/AboutSlider.vue"
 </section>
 
 
-    <ObrasDisplay>
+    <EstrenosDisplay>
 
-    </ObrasDisplay>
+    </EstrenosDisplay>
     <RouterLink :to="{ name: 'AdminView'}" class="btn" id="adminbtn">Admin</RouterLink>
 </template>
 
