@@ -8,6 +8,6 @@ public interface IAsientoService
     void Add(Asiento asiento);
     Asiento Get(int id);
     //List<Asiento> GetFromFunction(int idFunction);
-    public void Update(int asientoId, AsientoUpdateDTO asientoUpdate);
+    public void Update(int id, AsientoUpdateDTO asientoUpdate);
     void Delete(int id);
 }

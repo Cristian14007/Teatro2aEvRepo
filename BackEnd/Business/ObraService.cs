@@ -55,12 +55,6 @@ namespace BackEnd.Business{
             var obra = obraDTO.ToObra();
             obra.Titulo = obraUpdate.Titulo;
             obra.Descripcion = obraUpdate.Descripcion;
-            obra.Genero = obraUpdate.Genero;
-            obra.Interpretes = obraUpdate.Interpretes;
-            obra.Director = obraUpdate.Director;
-            obra.Valoracion = obraUpdate.Valoracion;
-            obra.Precio = obraUpdate.Precio;
-            obra.Duracion = obraUpdate.Duracion;
 
             _obraRepository.Update(obra);
             //_obraRepository.SaveChanges();

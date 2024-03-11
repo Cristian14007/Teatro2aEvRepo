@@ -69,13 +69,13 @@ public ActionResult<Asiento> Get(int id)
     }
 
 [HttpPut("{id}")]
-public IActionResult Update(int asientoId, [FromBody] AsientoUpdateDTO asientoUpdateDTO)
+public IActionResult Update(int id, [FromBody] AsientoUpdateDTO asientoUpdateDTO)
 {
     if (!ModelState.IsValid)  {return BadRequest(ModelState); } 
 
         try
         {
-            _asientoService.Update(asientoId, asientoUpdateDTO);
+            _asientoService.Update(id, asientoUpdateDTO);
             return NoContent();
         }
         catch (KeyNotFoundException)

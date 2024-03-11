@@ -50,6 +50,17 @@ namespace BackEnd.Data
         public Asiento Get(int id)
         {
             return _context.Asientos.FirstOrDefault(asiento => asiento.AsientoId == id);
+        /* var asientos = _context.Asientos.ToList();
+
+    var asientosDTO = asientos.Select(a => new AsientoGetDTO
+    {
+        AsientoId = a.AsientoId,
+        Reservado = a.Reservado,
+        Num_Asiento = a.Num_Asiento,
+        ObraId = a.ObraId
+    }).ToList().FirstOrDefault(asiento => asiento.AsientoId == id);
+
+    return asientosDTO; */
         }
 
         /* public List<Asiento> GetFromFunction(int idFunction)

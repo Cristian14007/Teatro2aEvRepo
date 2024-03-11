@@ -44,13 +44,13 @@ namespace BackEnd.Business
 
     }
 
-    public  void Update(int asientoId, AsientoUpdateDTO asientoUpdate)
+    public  void Update(int id, AsientoUpdateDTO asientoUpdate)
     {
         
-            var asiento = _asientoRepository.Get(asientoId);
+            var asiento = _asientoRepository.Get(id);
             if(asiento == null)
             {
-                throw new KeyNotFoundException($"Asiento con Id {asientoId} no encontrado.");
+                throw new KeyNotFoundException($"Asiento con Id {id} no encontrado.");
             }
 
             asiento.Reservado = asientoUpdate.Reservado;

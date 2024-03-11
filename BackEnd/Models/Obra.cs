@@ -12,13 +12,13 @@ public class Obra
         public string Imagen { get; set; }
         
         public string Descripcion { get; set; }
-        [Required]
+        
         public string Genero { get; set; }
-        [Required]
+        
         public string Duracion {get; set;}
-        [Required]
+        
         public string Director {get; set;}
-        [Required]
+        
         public string Interpretes {get; set;}
         
         public DateTime Fecha {get;set;}
@@ -29,9 +29,9 @@ public class Obra
 
         
         public int Sala {get;set;}
-        [Required]
+        
         public int Valoracion {get;set;}
-        [Required]
+        
         public int Precio {get;set;}
         //public List<Sesion> Sesiones { get; set; }
 

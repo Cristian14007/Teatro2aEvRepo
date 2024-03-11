@@ -100,9 +100,6 @@ namespace BackEnd.Data
                 Valoracion = o.Valoracion,
                 Precio = o.Precio,
                 Duracion = o.Duracion,
-                Fecha = o.Fecha,
-                Fecha_Estreno_1 = o.Fecha_Estreno_1,
-                Fecha_Estreno_2 = o.Fecha_Estreno_2,
                 Sala = o.Sala,
                 Asientos = o.Asientos.Select(a => new AsientoGetDTO
                 {

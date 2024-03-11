@@ -18,5 +18,15 @@ public class AsientoGetDTO
     
     public AsientoGetDTO() { }
     
+    public Asiento ToAsiento()
+{
+    return new Asiento
+    {
+        AsientoId = this.AsientoId,
+        Reservado = this.Reservado,
+        Num_Asiento = this.Num_Asiento,
+        ObraId = this.ObraId
+    };
+}
     
 }
