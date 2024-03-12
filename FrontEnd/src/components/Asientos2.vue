@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import IconButaca from '@/components/icons/IconButaca.vue';
+import IconAsiento from '@/components/icons/IconButaca.vue';
 import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+//import axios from 'axios';
 import { useRoute } from 'vue-router';
 
 
@@ -10,9 +10,8 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const obraId = route.params.obraId;
 const obra = ref<Obra | null>(null);
-const seats = ref<Array<Butaca>>([]);
+const seats = ref<Array<Asiento>>([]);
 const calcularCantidad = computed(() => seats.value.length);
-
 interface Obra {
   obraId: number;
   titulo: string;
@@ -22,115 +21,95 @@ interface Obra {
   duracion: string;
   director: string;
   interpretes: string;
+  fecha: Date;
+  asiento: Array<Asiento>;
 }
 
-interface Butaca {
+interface Asiento {
     obraId: number;
-    butacaId: number;
-    libre: boolean;
+    asientoId: number;
+    reservado: boolean;
 
 }
-
 // Simula una función para cargar los datos de la obra basada en obraId
 onMounted(async () => {
   try {
-    const response = await fetch(`http://localhost:5008/Obra/${obraId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch');
+    const obraResponse = await fetch(`http://localhost:5008/Obra/${obraId}`);
+    if (!obraResponse.ok) {
+      throw new Error('Failed to fetch obra details');
     }
-    obra.value = await response.json();
+    obra.value = await obraResponse.json();
+    await fetchSeatsPerId(obraId); // Llama a fetchSeatsPerId después de cargar los detalles de la obra
   } catch (error) {
     console.error('Error:', error);
   }
 });
-async function fetchSeatsPerId(id: any) {
-        try {
-            const response = await axios.get(`http://localhost:5008/Asiento/${id}`);
-            console.log("Fetch para sacar butacas por obra id");
-            seats.value = response.data;
-            console.log(seats.value);
 
-        } catch (error) {
-            console.error('Error al hacer la petición:', error);
+// Función para cargar los asientos por obraId
+async function fetchSeatsPerId(id:any) {
+    try {
+        const seatsResponse = await fetch(`http://localhost:5008/Asiento/${id}`);
+        if (!seatsResponse.ok) {
+            throw new Error('Failed to fetch seats');
         }
+        const data = await seatsResponse.json();
+        if (Array.isArray(data)) {
+            seats.value = data;
+        } else {
+            // Convertir objeto en array o manejar de otra manera
+            seats.value = [data]; // Si 'data' es un objeto y quieres convertirlo en un array
+        }
+    } catch (error) {
+        console.error('Error al hacer la petición:', error);
     }
-
+}
 
 
 
 const choosenSeats = ref<number[]>([]);
 
-function onChooseSeat(butacaId: number) {
-  console.log(`Se selecciona la butaca ${butacaId}`);
+function onChooseSeat(asientoId: number) {
+  console.log(`Se selecciona la asiento ${asientoId}`);
   // Agregar el asiento seleccionado al array
-  choosenSeats.value.push(butacaId);
+  choosenSeats.value.push(asientoId);
   console.log(choosenSeats.value);
   // Guardar en el sessionStorage
   sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
 }
 
-function onUnchooseSeat(butacaId: number) {
-  console.log(`Se deselecciona la butaca ${butacaId}`);
-  // Filtrar el array para eliminar la butaca deseleccionada
-  choosenSeats.value = choosenSeats.value.filter(seatId => seatId !== butacaId);
+function onUnchooseSeat(asientoId: number) {
+  console.log(`Se deselecciona la asiento ${asientoId}`);
+  // Filtrar el array para eliminar la asiento deseleccionada
+  choosenSeats.value = choosenSeats.value.filter(seatId => seatId !== asientoId);
   console.log(choosenSeats.value);
   // Actualizar el sessionStorage
   sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
 }
 
-// Filtro para formatear la fecha
-const formatoFecha = (fechaHora: string) => {
-    const fecha = new Date(fechaHora);
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return fecha.toLocaleDateString('es-ES', options);
-};
-
-// Filtro para formatear la hora
-const formatoHora = (fechaHora: string) => {
-    const hora = new Date(fechaHora);
-    const options = { hour: 'numeric', minute: 'numeric' };
-    return hora.toLocaleTimeString('es-ES', options);
-};
 </script>
 
 
 <template>
-    <div>
-        Butacas view
-    </div>
 
     <div class="content">
-        <div class="info">
-            <div class="info__text">
-                <div class="title">
-                    <h2>TITULO DE LA FUNCIÓN:</h2>
-                    <h3>{{ FunctionStore.functions.titulo }}</h3>
-                </div>
-                <div class="hour">
-                    <h2>HORA DE LA FUNCIÓN:</h2>
-                    <h3>{{ formatoFecha(FunctionStore.functions.diaObra) }}</h3>
-                </div>
-            </div>
-            <div class="info__img">
-                <img :src="'../src/assets/IMAGENES/' + FunctionStore.functions.imagen" alt="">
-            </div>
-        </div>
         <div class="selection">
             <div class="title">
-                <h2>SELECCION BUTACAS</h2>
+                <h2>SELECCION Asientos</h2>
+                <h3>Total de Asientos: {{ calcularCantidad }}</h3>
             </div>
-            <div class="gridButacas">
-                <div class="butacas">
+            <div class="gridasientos">
+                <div class="asientos">
+  < <div v-for="filaIndex in 10" :key="filaIndex" class="fila">
+    <IconAsiento
+      v-for="asiento in obra.value.asientos.slice((filaIndex - 1) * 10, filaIndex * 10)"
+      :key="asiento.asientoId"
+      :isFree="!asiento.reservado"
+      :asientoid="asiento.asientoId"
+      @selectSeat="onChooseSeat"
+      @unselectSeat="onUnchooseSeat" />
+  </div>
+</div>
 
-                    <div v-for="filaIndex in 10" :key="filaIndex">
-                        <div class="fila">
-                            <IconButaca
-                                v-for="(butaca, index) in SeatStore.seats.slice((filaIndex - 1) * 10, filaIndex * 10)"
-                                :key="butaca.butacaId" :isFree="butaca.libre" :butacaId="butaca.butacaId" @selectSeat="onChooseSeat" @unselectSeat="onUnchooseSeat"/>
-                        </div>
-
-                    </div>
-                </div>
 
 
             </div>
@@ -139,7 +118,7 @@ const formatoHora = (fechaHora: string) => {
             </div>
         </div>
         <div class="button" id="botonPago">
-            <RouterLink :to="'/Compra'">IR A PAGAR</RouterLink>
+            <RouterLink :to="'/compra'">IR A PAGAR</RouterLink>
         </div>
     </div>
 </template>

@@ -5,13 +5,13 @@ const emits = defineEmits(['selectSeat', 'unselectSeat'])
 
 defineProps<{
     isFree: boolean;
-    butacaId: number;
+    asientoid: number;
 }>()
 
 const seatRef = ref<SVGGElement>();
 
 // Funcion para seleccionar butacas
-function chooseSeat(butacaId: number, isFree: boolean) {
+function chooseSeat(asientoid: number, isFree: boolean) {
     if (seatRef.value) {
         const esLibre = seatRef.value.classList.contains('free');
         // Si la butaca está libre en la base de datos
@@ -21,17 +21,17 @@ function chooseSeat(butacaId: number, isFree: boolean) {
             if (esLibre) { 
                 seatRef.value.classList.remove('free');
                 seatRef.value.classList.add('choosen');
-                emits('selectSeat', butacaId);
+                emits('selectSeat', asientoid);
             // Si se deselecciona
             } else {
                 seatRef.value.classList.remove('choosen');
                 seatRef.value.classList.add('free');
-                emits('unselectSeat', butacaId);
+                emits('unselectSeat', asientoid);
             }
 
         // Si la butaca está ocupada en la base de datos
         } else {
-            console.log("butaca OCUPADA en la BBDD: " + butacaId);
+            console.log("butaca OCUPADA en la BBDD: " + asientoid);
         }
     }
 }
@@ -39,7 +39,7 @@ function chooseSeat(butacaId: number, isFree: boolean) {
 
 <template>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 35" width="43" height="35">
-        <g ref="seatRef" :class="[isFree ? 'free' : 'taken']" @click="chooseSeat(butacaId, isFree)">
+        <g ref="seatRef" :class="[isFree ? 'free' : 'taken']" @click="chooseSeat(asientoid, isFree)">
             <!-- respaldo -->
             <rect x="6" y="1" width="30" height="20" rx="5" />
 
