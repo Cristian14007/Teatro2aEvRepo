@@ -32,10 +32,15 @@ public ActionResult<ObraGetDTO> Get(int id)
 }
 
     [HttpPost]
-public IActionResult Create(Obra obra)
+public IActionResult Create(ObraCreateDTO obraCreateDTO)
 {            
-    _obraService.Add(obra);
-    return CreatedAtAction(nameof(Get), new { id = obra.ObraId }, obra);
+     if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        _obraService.Add(obraCreateDTO);
+        return Ok();
 }
 
 [HttpPut("{id}")]

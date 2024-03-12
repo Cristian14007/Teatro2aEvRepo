@@ -14,7 +14,7 @@ namespace BackEnd.Data
 
         public void Add(Obra obra)
         {
-            _context.Obras.Add(obra);
+            _context.Obras.Add(obra); 
             SaveChanges();
         }
 
