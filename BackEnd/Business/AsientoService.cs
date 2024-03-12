@@ -22,7 +22,7 @@ namespace BackEnd.Business
             return _asientoRepository.GetAll();
         }
 
-        public  Asiento Get(int id)
+        public  AsientoGetDTO Get(int id)
         {
             var asiento = _asientoRepository.Get(id);
 
@@ -47,17 +47,18 @@ namespace BackEnd.Business
     public  void Update(int id, AsientoUpdateDTO asientoUpdate)
     {
         
-            var asiento = _asientoRepository.Get(id);
-            if(asiento == null)
+            var asientoDTO = _asientoRepository.Get(id);
+            if(asientoDTO == null)
             {
                 throw new KeyNotFoundException($"Asiento con Id {id} no encontrado.");
             }
-
+            
+            var asiento = asientoDTO.ToAsiento();
             asiento.Reservado = asientoUpdate.Reservado;
             
 
             _asientoRepository.Update(asiento);
-            _asientoRepository.SaveChanges();
+            //_asientoRepository.SaveChanges();
 
             
     }
