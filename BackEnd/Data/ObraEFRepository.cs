@@ -20,13 +20,25 @@ namespace BackEnd.Data
 
         public void Delete(int id)
         {
-            var obra = Get(id);
-            if (obra != null)
+            // var obra = Get(id);
+            // if (obra != null)
+            // {
+            //     _context.Obras.Remove(obra);
+            // }
+
+            // SaveChanges();
+            var obraDto = Get(id);
+            if (obraDto == null)
             {
-                _context.Remove(obra);
+                throw new KeyNotFoundException("Obra not found.");
             }
 
-            SaveChanges();
+            var obra = _context.Obras.FirstOrDefault(o => o.ObraId == id);
+            if (obra != null)
+            {
+                _context.Obras.Remove(obra);
+                SaveChanges();
+            }
 
         }
 
@@ -47,6 +59,8 @@ namespace BackEnd.Data
                 Director = o.Director,
                 Valoracion = o.Valoracion,
                 Precio = o.Precio,
+                Duracion = o.Duracion,
+                Imagen = o.Imagen,
                 Asientos = o.Asientos.Select(a => new AsientoGetDTO
                 {
                     AsientoId = a.AsientoId,
@@ -101,6 +115,7 @@ namespace BackEnd.Data
                 Precio = o.Precio,
                 Duracion = o.Duracion,
                 Sala = o.Sala,
+                Imagen= o.Imagen,
                 Asientos = o.Asientos.Select(a => new AsientoGetDTO
                 {
                     AsientoId = a.AsientoId,

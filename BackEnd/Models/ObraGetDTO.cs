@@ -17,6 +17,7 @@ public class ObraGetDTO
     public int Precio { get; set; }
     public string Duracion {get; set;}
     public int Sala {get;set;}
+    public string Imagen {get;set;}
 
 
     public List<AsientoGetDTO> Asientos{get;set;}
@@ -40,6 +41,7 @@ public class ObraGetDTO
         Sala = this.Sala,
         Valoracion = this.Valoracion,
         Precio = this.Precio,
+        Imagen =this.Imagen,
         Asientos = this.Asientos != null ? this.Asientos.Select(a => new Asiento
         {
             AsientoId = a.AsientoId,
