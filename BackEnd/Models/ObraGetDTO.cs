@@ -19,6 +19,12 @@ public class ObraGetDTO
     public int Sala {get;set;}
     public string Imagen {get;set;}
 
+    public DateTime Fecha {get;set;}
+        
+        public DateTime Fecha_Estreno_1 {get;set;}
+        
+        public DateTime Fecha_Estreno_2 {get;set;}
+
 
     public List<AsientoGetDTO> Asientos{get;set;}
 
@@ -42,6 +48,9 @@ public class ObraGetDTO
         Valoracion = this.Valoracion,
         Precio = this.Precio,
         Imagen =this.Imagen,
+        Fecha = this.Fecha,
+        Fecha_Estreno_1 = Fecha_Estreno_1,
+        Fecha_Estreno_2 = this.Fecha_Estreno_2,
         Asientos = this.Asientos != null ? this.Asientos.Select(a => new Asiento
         {
             AsientoId = a.AsientoId,

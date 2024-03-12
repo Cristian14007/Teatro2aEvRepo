@@ -5,7 +5,7 @@ namespace BackEnd.Business
     public interface IObraService
     {
         List<ObraGetDTO> GetAll();
-        void Add(Obra obra);
+        void Add(ObraCreateDTO obraCreateDTO);
         ObraGetDTO Get(int id);
 
         /* ObraGetDTO GetDTO(int id); */

@@ -14,19 +14,13 @@ namespace BackEnd.Data
 
         public void Add(Obra obra)
         {
-            _context.Obras.Add(obra);
+            _context.Obras.Add(obra); 
             SaveChanges();
         }
 
         public void Delete(int id)
         {
-            // var obra = Get(id);
-            // if (obra != null)
-            // {
-            //     _context.Obras.Remove(obra);
-            // }
-
-            // SaveChanges();
+            
             var obraDto = Get(id);
             if (obraDto == null)
             {
@@ -61,6 +55,10 @@ namespace BackEnd.Data
                 Precio = o.Precio,
                 Duracion = o.Duracion,
                 Imagen = o.Imagen,
+                Sala = o.Sala,
+                Fecha = o.Fecha,
+                Fecha_Estreno_1 = o.Fecha_Estreno_1,
+                Fecha_Estreno_2 = o.Fecha_Estreno_2,
                 Asientos = o.Asientos.Select(a => new AsientoGetDTO
                 {
                     AsientoId = a.AsientoId,
@@ -74,26 +72,7 @@ namespace BackEnd.Data
             return obrasDTO;
         }
 
-        /* public ObraGetDTO GetDTO(int id){
-
-            var obras = _context.Obras
-                .Include(o => o.Asientos)
-                .ToList();
-
-            var obrasDTO = obras.Select(o => new ObraGetDTO
-            {
-                ObraId = o.ObraId,
-                Titulo = o.Titulo,
-                Asientos = o.Asientos.Select(a => new AsientoGetDTO
-                {
-                    AsientoId = a.AsientoId,
-                    Reservado = a.Reservado
-
-                }).ToList()
-            }).FirstOrDefault(o => o.ObraId == id);
-
-            return obrasDTO;
-        } */
+        
 
         public List<ObraGetDTO> GetAll()
         {

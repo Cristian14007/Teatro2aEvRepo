@@ -20,37 +20,9 @@ public class AsientoController : ControllerBase
     _asientoService.GetAll();
 
 
-   // PILLAR SOLO 1 Asientos
-    /* [HttpGet]
-    [Route("{idFunction}/{idAsiento}")]
-    public ActionResult<AsientosObra> GetAsiento(int idFunction, int idAsiento)
-    {
-        var Asiento = _AsientoService.GetAsiento(idFunction, idAsiento);
-
-        if (Asiento == null){
-            return NotFound();
-        }else{
-            return Asiento;
-        }
-    } */
-
-   // PILLAR TODAS LAS AsientosS DE 1 FUNCION
-    /* [HttpGet]
-    [Route("{id}")]
-    public ActionResult<List<AsientosObra>> GetFromFunction(int id)
-    {
-        var Asiento = _AsientoService.GetFromFunction(id);
-
-        if (Asiento == null){
-            return NotFound();
-        }else{
-            return Asiento;
-        }
-    } */
-
     [HttpGet]
     [Route("{id}")]
-public ActionResult<Asiento> Get(int id)
+public ActionResult<AsientoGetDTO> Get(int id)
 {
     var asiento = _asientoService.Get(id);
 

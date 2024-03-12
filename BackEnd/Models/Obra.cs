@@ -56,8 +56,36 @@ public class Obra
         Fecha_Estreno_2 = fecha_Estreno_2;     
         Precio = precio;
        
+    }
 
+    public Obra modifyObraToDTO(ObraCreateDTO obraCreateDTO)
+    {
+        if (obraCreateDTO == null)
+        {
+            
+            throw new ArgumentNullException(nameof(obraCreateDTO));
+        }
 
+        var obra = new Obra
+        {
+            Titulo = obraCreateDTO.Titulo,
+            Descripcion = obraCreateDTO.Descripcion,
+            Imagen = obraCreateDTO.Imagen,
+            Genero = obraCreateDTO.Genero,
+            Duracion = obraCreateDTO.Duracion,
+            Precio = obraCreateDTO.Precio,
+            Director = obraCreateDTO.Director,
+            Interpretes = obraCreateDTO.Interpretes,
+            Fecha = obraCreateDTO.Fecha,
+            Fecha_Estreno_1 = obraCreateDTO.Fecha_Estreno_1,
+            Fecha_Estreno_2 = obraCreateDTO.Fecha_Estreno_2,
+            Sala = obraCreateDTO.Sala,
+            Valoracion = obraCreateDTO.Valoracion
+
+            
+        };
+
+        return obra;
     }
 
     

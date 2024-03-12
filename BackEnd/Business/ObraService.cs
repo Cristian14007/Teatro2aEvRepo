@@ -12,9 +12,11 @@ namespace BackEnd.Business{
         public ObraService(IObraRepository obraRepository){
             _obraRepository = obraRepository;
         }
-        public void Add(Obra obra)
+        public void Add(ObraCreateDTO obraCreateDTO)
         {
-            _obraRepository.Add(obra);
+            var obra = new Obra();
+            var newObra = obra.modifyObraToDTO(obraCreateDTO);
+            _obraRepository.Add(newObra);
         }
 
         public void Delete(int id)
