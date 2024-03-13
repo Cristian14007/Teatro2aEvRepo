@@ -22,6 +22,7 @@ import logo from '../components/logo.vue'
     <RouterLink to="/cartelera">Cartelera</RouterLink>
     <RouterLink to="/">Próximos Estrenos</RouterLink>
     <RouterLink to="/about">Sobre Nosotros</RouterLink>
+    <RouterLink :to="{ name: 'AdminView'}" class="btn" id="adminbtn">Admin</RouterLink>
     </nav>
 
 </header>

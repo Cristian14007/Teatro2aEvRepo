@@ -1,36 +1,58 @@
 <template>
-    <div class="container">
-        <div v-for="obra in obras" :key="obra.obraId" class="obra">
-            <h2>{{ obra.titulo }}</h2>
-            <p>{{ obra.descripcion }}</p>
-            <p>Género: {{ obra.genero }}</p>
-            <p>duracion: {{ obra.duracion }}</p>
-            <p>director: {{ obra.director }}</p>
-            <p>interpretes: {{ obra.interpretes }}</p>
-            <p>fecha: {{ obra.fecha }}</p>
-            <p>sala: {{ obra.sala }}</p>
-            <p>precio: {{ obra.precio }}</p>
-            <p>valoracion: {{ obra.valoracion }}</p>
-            <button @click="eliminarObra(obra.obraId)">Eliminar</button>
-            <!-- <button @click="mostrarModalEditar(obra)">Editar</button> -->
-            <button @click="mostrarModalEditar(obra.obraId)">Editar</button>
-
-        </div>
-        <!-- Modal para editar obra -->
-  <div v-if="obraIdEditada" class="modal">
-    <h2>Editar Obra</h2>
-    <form @submit.prevent="enviarEdicion">
-      <input type="text" v-model="obraEditada.titulo" placeholder="Título" required>
-      <input type="text" v-model="obraEditada.descripcion" placeholder="Descripción" required>
-      <!-- Agrega campos adicionales para las demás propiedades de la obra -->
-      <button type="submit">Guardar Cambios</button>
-      <!-- <button type="button" @click="cerrarModal">Cancelar</button> -->
-    </form>
+  <div class="container">
+    <table>
+<thead>
+  <tr>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Género</th>
+    <th>Duración</th>
+    <th>Director</th>
+    <th>Intérpretes</th>
+    <th>Fecha</th>
+    <th>Sala</th>
+    <th>Precio</th>
+    <th>Valoración</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <tr v-for="obra in obras" :key="obra.obraId">
+    <td>{{ obra.titulo }}</td>
+    <td>{{ obra.descripcion }}</td>
+    <td>{{ obra.genero }}</td>
+    <td>{{ obra.duracion }}</td>
+    <td>{{ obra.director }}</td>
+    <td>{{ obra.interpretes }}</td>
+    <td>{{ obra.fecha }}</td>
+    <td>{{ obra.sala }}</td>
+    <td>{{ obra.precio }}</td>
+    <td>{{ obra.valoracion }}</td>
+    <td>
+      <div class="action-buttons">
+        <button class="delete-button" @click="eliminarObra(obra.obraId)">Eliminar</button>
+        <!-- <button @click="mostrarModalEditar(obra)">Editar</button> -->
+        <button class="edit-button" @click="mostrarModalEditar(obra.obraId)">Editar</button>
+      </div>
+    </td>
+  </tr>
+</tbody>
+</table>
+      <!-- Modal para editar obra -->
+<div v-if="obraIdEditada" class="modal">
+  <h2>Editar Obra</h2>
+  <form @submit.prevent="enviarEdicion">
+    <input type="text" v-model="obraEditada.titulo" placeholder="Título" required>
+    <input type="text" v-model="obraEditada.descripcion" placeholder="Descripción" required>
+    <!-- Agrega campos adicionales para las demás propiedades de la obra -->
+    <button type="submit">Guardar Cambios</button>
+    <!-- <button type="button" @click="cerrarModal">Cancelar</button> -->
+  </form>
+</div>
   </div>
-    </div>
-    <!-- Añade esto para depurar -->
-    <!-- <pre>{{ obraSeleccionada }}</pre>
-    <pre>{{ obraEditada }}</pre> -->
+  <!-- Añade esto para depurar -->
+  <!-- <pre>{{ obraSeleccionada }}</pre>
+  <pre>{{ obraEditada }}</pre> -->
 </template>
   
 <script setup lang="ts">
@@ -144,6 +166,50 @@ const enviarEdicion = async () => {
     z-index: 1000;
     /* Otros estilos que necesites para hacer visible el modal */
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .action-buttons button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .delete-button {
+    background-color: #FF5733; /* Rojo */
+    color: white;
+  }
+
+  .edit-button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+  }
+
+  .edit-button:hover {
+    background-color: #45a049;
+  }
 </style>
 
   

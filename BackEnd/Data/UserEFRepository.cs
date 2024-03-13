@@ -31,7 +31,8 @@ namespace BackEnd.Data
                 {
                     UserId = u.UserId,
                     Name = u.Name,
-                    Password = u.Password
+                    Password = u.Password,
+                    Email = u.Email
                 }).ToList();
                 return UserGetDTO;
             }
@@ -60,6 +61,7 @@ namespace BackEnd.Data
                     UserId = user.UserId,
                     Name = user.Name,
                     Password = user.Password,
+                    Email = user.Email
                 };
 
                 return UserGetDTO;

@@ -23,7 +23,7 @@ import AboutSlider from "../components/AboutSlider.vue"
     <EstrenosDisplay>
 
     </EstrenosDisplay>
-    <RouterLink :to="{ name: 'AdminView'}" class="btn" id="adminbtn">Admin</RouterLink>
+  
 </template>
 
 <style scoped>

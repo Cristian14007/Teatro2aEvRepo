@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Admin from "../components/Admin.vue"
 import { ref } from 'vue';
+import UsersAdmin from "@/components/UsersAdmin.vue";
 
 const nombreUsuario = ref('');
 const contra = ref('');
@@ -35,6 +36,7 @@ const verificarAcceso = () => {
 
     <!-- Componente Admin, mostrado solo si el usuario es admin -->
     <Admin v-if="esAdmin" />
+    <UsersAdmin v-if="esAdmin" />
   </div>
 </template>
 

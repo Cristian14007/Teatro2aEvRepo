@@ -8,6 +8,7 @@ public class UserGetDTO
     public int UserId { get; set; }
     public string Name { get; set; }
     public string Password {get; set;}
+    public string Email {get; set;}
 
         public User ToUser()
     {
@@ -15,7 +16,8 @@ public class UserGetDTO
         {
             UserId = this.UserId,
             Name = this.Name,
-            Password = this.Password
+            Password = this.Password,
+            Email = this.Email
         };
     }
 }
