@@ -8,14 +8,30 @@ namespace BackEnd.Data
 
         private readonly ObraContext _context;
 
-        public ObraEFRepository(ObraContext context){
+        private readonly IAsientoRepository _asientosRepository;
+
+        public ObraEFRepository(ObraContext context, IAsientoRepository asientoRepository){
             _context = context;
+            _asientosRepository = asientoRepository;
         }
 
         public void Add(Obra obra)
         {
             _context.Obras.Add(obra); 
             SaveChanges();
+
+            for (int i = 1; i <= 20; i++)
+            {
+                var asiento = new Asiento
+                {
+                    ObraId = obra.ObraId,
+                    Num_Asiento = i,
+                    Reservado = false
+                };
+
+                    _asientosRepository.Add(asiento);
+                
+            }
         }
 
         public void Delete(int id)

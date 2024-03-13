@@ -42,16 +42,11 @@ namespace BackEnd.Data.Migrations
                     b.Property<int?>("SesionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("AsientoId");
 
                     b.HasIndex("ObraId");
 
                     b.HasIndex("SesionId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Asientos");
 
@@ -1721,17 +1716,37 @@ namespace BackEnd.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "admin@gmail.com",
+                            Name = "Admin",
+                            Password = "admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Email = "user1@gmail.com",
+                            Name = "User1",
+                            Password = "user1"
+                        });
                 });
 
             modelBuilder.Entity("BackEnd.Models.Asiento", b =>
@@ -1745,10 +1760,6 @@ namespace BackEnd.Data.Migrations
                     b.HasOne("BackEnd.Models.Sesion", null)
                         .WithMany("Asientos")
                         .HasForeignKey("SesionId");
-
-                    b.HasOne("BackEnd.Models.User", null)
-                        .WithMany("Asientos")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Obra");
                 });
@@ -1770,11 +1781,6 @@ namespace BackEnd.Data.Migrations
                 });
 
             modelBuilder.Entity("BackEnd.Models.Sesion", b =>
-                {
-                    b.Navigation("Asientos");
-                });
-
-            modelBuilder.Entity("BackEnd.Models.User", b =>
                 {
                     b.Navigation("Asientos");
                 });

@@ -55,6 +55,9 @@ namespace BackEnd.Data{
             .WithOne(a => a.Obra)
             .HasForeignKey(a => a.ObraId);
 
+            modelBuilder.Entity<User>()
+                .HasKey(u => new { u.UserId });
+
             
             
 modelBuilder.Entity<Obra>().HasData(
@@ -282,7 +285,10 @@ modelBuilder.Entity<Asiento>().HasData(
                 CreateAsientosObra(1).ToList() // Crea una nueva Asiento con AsientoId = 1 y Reservado = false
             ); */
 
-
+modelBuilder.Entity<User>().HasData(
+                new User { UserId = 1, Name = "Admin", Email = "admin@gmail.com", Password = "admin" },
+                new User { UserId = 2, Name = "User1", Email = "user1@gmail.com", Password = "user1" }
+            );
 
 
         }
@@ -295,6 +301,6 @@ modelBuilder.Entity<Asiento>().HasData(
 
         public DbSet<Sesion> Sesiones {get; set;}
 
-        public DbSet<User> Usuarios {get; set;}
+        public DbSet<User> Users { get; set;}
     }
 }

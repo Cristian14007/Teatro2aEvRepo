@@ -30,5 +30,22 @@ public class Asiento
         
     }
 
+public Asiento modifyAsientoToDTO(AsientoCreateDTO asientoCreateDTO){
+        
+        if (asientoCreateDTO == null)
+        {
+            
+            throw new ArgumentNullException(nameof(asientoCreateDTO));
+        }
+
+        var asiento = new Asiento
+        {
+            ObraId = asientoCreateDTO.ObraId,
+            Num_Asiento = asientoCreateDTO.Num_Asiento,
+            Reservado = false
+        };
+
+        return asiento;    
+    }
     
 }

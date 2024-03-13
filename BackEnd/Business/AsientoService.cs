@@ -38,10 +38,11 @@ namespace BackEnd.Business
         } */
           
 
-    public  void Add(Asiento asiento)
+    public  void Add(AsientoCreateDTO asientoCreateDTO)
     {
-        _asientoRepository.Add(asiento);
-
+        var asiento = new Asiento();
+        var newAsiento = asiento.modifyAsientoToDTO(asientoCreateDTO);      
+        _asientoRepository.Add(newAsiento);
     }
 
     public  void Update(int id, AsientoUpdateDTO asientoUpdate)

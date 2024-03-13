@@ -33,11 +33,16 @@ public ActionResult<AsientoGetDTO> Get(int id)
 }
 
 
-    [HttpPost]
-    public IActionResult Create(Asiento asiento)
+   [HttpPost]
+    public IActionResult Create(AsientoCreateDTO asientoCreateDTO)
     {
-        _asientoService.Add(asiento);
-        return CreatedAtAction(nameof(Get), new { id = asiento.AsientoId }, asiento);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        _asientoService.Add(asientoCreateDTO);
+        return Ok();
     }
 
 [HttpPut("{id}")]
