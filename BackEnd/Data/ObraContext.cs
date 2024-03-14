@@ -58,7 +58,9 @@ namespace BackEnd.Data{
             modelBuilder.Entity<User>()
                 .HasKey(u => new { u.UserId });
 
-            
+            modelBuilder.Entity<Estreno>()
+             .HasKey(e => new { e.EstrenoId });
+
             
 modelBuilder.Entity<Obra>().HasData(
 new Obra { ObraId = 1, Titulo = "Hamlet", Descripcion = "Una obra de Shakespeare.", Genero = "Drama", Imagen = "ruta imagen 1", Duracion = "120 mins", Director = "Andres Torres", Interpretes = "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía", Fecha = new DateTime(2024, 03, 20, 20, 0, 0), Fecha_Estreno_1 = new DateTime(2024, 04, 08, 21, 0, 0), Fecha_Estreno_2 = new DateTime(2024, 05, 05, 22, 30, 0), Sala = 1, Valoracion = 4, Precio = 30},
@@ -290,6 +292,12 @@ modelBuilder.Entity<User>().HasData(
                 new User { UserId = 2, Name = "User1", Email = "user1@gmail.com", Password = "user1" }
             );
 
+modelBuilder.Entity<Estreno>().HasData(
+                new Estreno { EstrenoId = 1, Titulo = "Mary Poppins", Imagen = "admin@gmail.com" },
+                new Estreno { EstrenoId = 2, Titulo = "La Celestina", Imagen = "user1@gmail.com" },
+                 new Estreno { EstrenoId = 3, Titulo = "Bodas de sangre", Imagen = "user1@gmail.com" },
+                  new Estreno { EstrenoId = 4, Titulo = "Tributo a coldplay", Imagen = "user1@gmail.com" }
+            );
 
         }
 
@@ -302,5 +310,7 @@ modelBuilder.Entity<User>().HasData(
         public DbSet<Sesion> Sesiones {get; set;}
 
         public DbSet<User> Users { get; set;}
+
+        public DbSet<Estreno> Estrenos { get; set;}
     }
 }

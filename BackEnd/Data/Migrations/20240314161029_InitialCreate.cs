@@ -10,6 +10,20 @@ namespace BackEnd.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Estrenos",
+                columns: table => new
+                {
+                    EstrenoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estrenos", x => x.EstrenoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Obras",
                 columns: table => new
                 {
@@ -95,6 +109,17 @@ namespace BackEnd.Data.Migrations
                         column: x => x.SesionId,
                         principalTable: "Sesiones",
                         principalColumn: "SesionId");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Estrenos",
+                columns: new[] { "EstrenoId", "Imagen", "Titulo" },
+                values: new object[,]
+                {
+                    { 1, "admin@gmail.com", "Mary Poppins" },
+                    { 2, "user1@gmail.com", "La Celestina" },
+                    { 3, "user1@gmail.com", "Bodas de sangre" },
+                    { 4, "user1@gmail.com", "Tributo a coldplay" }
                 });
 
             migrationBuilder.InsertData(
@@ -378,6 +403,9 @@ namespace BackEnd.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Asientos");
+
+            migrationBuilder.DropTable(
+                name: "Estrenos");
 
             migrationBuilder.DropTable(
                 name: "Users");

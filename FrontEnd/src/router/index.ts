@@ -36,9 +36,10 @@ const router = createRouter({
             component: ReservaView
         },
         {
-            path: '/compra/:obraId',
+            path: '/compra/:obraId/:selectedSeats?',
             name: 'CompraView',
-            component: CompraView
+            component: CompraView,
+            props: true 
         },
         {
             path: '/entrada/:obraId',

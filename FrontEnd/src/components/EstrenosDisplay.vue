@@ -6,10 +6,7 @@ interface Obra {
   obraId: number;
   titulo: string;
   imagen: string;
-  descripcion: string;
-  genero: string;
-  valoracion: number;
-  precio: number;
+  
 }
 
 const obras = ref<Obra[]>([]);
@@ -17,7 +14,7 @@ const obras = ref<Obra[]>([]);
 
 onMounted(async () => {
   try {
-    const response = await fetch('http://localhost:5008/Obra');
+    const response = await fetch('http://localhost:5008/Estreno');
     const data = await response.json();
     console.log(data); // Esto te mostrará los datos exactos que estás recibiendo
     obras.value = data;

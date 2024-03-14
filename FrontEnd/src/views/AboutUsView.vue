@@ -1,14 +1,9 @@
 
-<script>
+<script setup lang="ts">
 import ReviewSection from '@/components/ReviewSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 
-export default {
-  components: {
-    ReviewSection,
-    ContactSection
-  }
-}
+
 </script>
 
 <template>

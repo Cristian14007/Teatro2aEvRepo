@@ -6,7 +6,7 @@ const emits = defineEmits(['selectSeat', 'unselectSeat'])
 defineProps<{
     isFree: boolean;
     asientoid: number;
-    numAsiento: number;
+    num_Asiento: number;
 }>()
 
 const seatRef = ref<SVGGElement>();
@@ -53,7 +53,7 @@ function chooseSeat(asientoid: number, isFree: boolean) {
             <!-- reposabrazos derecho -->
             <rect x="31" y="13" width="10" height="20" rx="5" />
 
-            <text x="20" y="25" fill="black" text-anchor="middle" alignment-baseline="middle">{{ numAsiento }}</text>
+            <text x="20" y="25" fill="black" text-anchor="middle" alignment-baseline="middle">{{ num_Asiento }}</text>
         </g>
     </svg>
 </template>

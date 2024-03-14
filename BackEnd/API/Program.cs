@@ -49,6 +49,9 @@ builder.Services.AddScoped<IAsientoRepository, AsientoEFRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserEFRepository>();
 
+builder.Services.AddScoped<IEstrenoService, EstrenoService>();
+builder.Services.AddScoped<IEstrenoRepository, EstrenoEFRepository>();
+
 
 //var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");

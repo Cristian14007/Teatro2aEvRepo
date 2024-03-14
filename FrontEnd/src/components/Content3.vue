@@ -19,7 +19,7 @@
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Fecha 
             </div>
             <div class="col-6"  id="obra-fecha" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> 
-              {{ obra ? obra.fecha : 'Cargando...' }} </div>
+              {{ obra ? obra.fecha : 'Cargando...' }}  </div>
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
@@ -32,7 +32,9 @@
         <div class="row">
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Asientos Seleccionados
             </div>
-            <div class="col-6"  id="obra-asientos" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;"> </div>
+            <div class="col-6" id="obra-asientos" style="border: 3px solid black; padding: 10px; text-align: center; font-size: 200%;">
+              {{ selectedSeatNumbers.join(', ') }}
+    </div>
         </div>
 
     </div>
@@ -78,6 +80,8 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const obraId = route.params.obraId;
 const obra = ref<Obra | null>(null);
+  const selectedSeats = route.params.selectedSeats;
+  const selectedSeatNumbers = Array.isArray(selectedSeats) ? selectedSeats : [selectedSeats];
 
 interface Obra {
   obraId: number;
@@ -91,6 +95,14 @@ interface Obra {
   fecha: Date;
   sala: number;
   precio: number;
+  asientos: Array<Asiento>;
+}
+interface Asiento {
+    obraId: number;
+    asientoId: number;
+    reservado: boolean;
+    num_Asiento: number;
+
 }
 
 // Simula una función para cargar los datos de la obra basada en obraId

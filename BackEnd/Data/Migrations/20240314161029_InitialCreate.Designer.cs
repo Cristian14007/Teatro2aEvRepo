@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Data.Migrations
 {
     [DbContext(typeof(ObraContext))]
-    [Migration("20240313170418_InitialCreate")]
+    [Migration("20240314161029_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1452,6 +1452,53 @@ namespace BackEnd.Data.Migrations
                             Num_Asiento = 20,
                             ObraId = 10,
                             Reservado = false
+                        });
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Estreno", b =>
+                {
+                    b.Property<int>("EstrenoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EstrenoId"), 1L, 1);
+
+                    b.Property<string>("Imagen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EstrenoId");
+
+                    b.ToTable("Estrenos");
+
+                    b.HasData(
+                        new
+                        {
+                            EstrenoId = 1,
+                            Imagen = "admin@gmail.com",
+                            Titulo = "Mary Poppins"
+                        },
+                        new
+                        {
+                            EstrenoId = 2,
+                            Imagen = "user1@gmail.com",
+                            Titulo = "La Celestina"
+                        },
+                        new
+                        {
+                            EstrenoId = 3,
+                            Imagen = "user1@gmail.com",
+                            Titulo = "Bodas de sangre"
+                        },
+                        new
+                        {
+                            EstrenoId = 4,
+                            Imagen = "user1@gmail.com",
+                            Titulo = "Tributo a coldplay"
                         });
                 });
 

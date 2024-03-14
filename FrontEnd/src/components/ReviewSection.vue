@@ -48,11 +48,8 @@
     </section>
   </template>
   
-  <script>
-  export default {
-    name: 'ReviewSection',
-    // Aquí puedes agregar data, computed properties, methods, etc., si es necesario
-  }
+  <script setup lang="ts">
+  
   </script>
   
   <style scoped>

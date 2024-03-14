@@ -7,12 +7,28 @@ import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 const router = useRouter(); // Obtiene el objeto router
 
+import { toRaw } from 'vue';
 
 async function proceedToPurchase() {
     await updateSeatStatus();
-    // Navegar a la vista de compra después de actualizar los asientos
-    router.push({ name: 'CompraView', params: { obraId },  });
+
+    console.log("Asientos seleccionados (reactivos):", choosenSeats.value);
+    console.log("Asientos seleccionados (raw):", toRaw(choosenSeats.value));
+
+
+    const selectedSeatNumbers = choosenSeats.value.map(seat => seat.num_Asiento);
+    console.log("Asientos seleccionados:", selectedSeatNumbers);
+
+    router.push({ 
+        name: 'CompraView', 
+        params: { 
+            selectedSeats: selectedSeatNumbers.join(',') 
+        } 
+    });
 }
+
+
+
 
 // cojo la url y el id de la obra
 const route = useRoute();
@@ -40,6 +56,10 @@ interface Asiento {
     num_Asiento: number;
 
 }
+interface Seat {
+    asientoId: number;
+    num_Asiento: number;
+}
 // Simula una función para cargar los datos de la obra basada en obraId
 onMounted(async () => {
     try {
@@ -55,44 +75,29 @@ onMounted(async () => {
     }
 });
 
-
-// // Función para cargar los asientos por obraId
-// async function fetchSeatsPerId(id: any) {
-//     try {
-//         const seatsResponse = await fetch(`http://localhost:5008/Asiento/${id}`);
-//         if (!seatsResponse.ok) {
-//             throw new Error('Failed to fetch seats');
-//         }
-//         const data = await seatsResponse.json();
-//         if (Array.isArray(data)) {
-//             seats.value = data;
-//         } else {
-//             // Convertir objeto en array o manejar de otra manera
-//             seats.value = [data]; // Si 'data' es un objeto y quieres convertirlo en un array
-//         }
-//     } catch (error) {
-//         console.error('Error al hacer la petición:', error);
-//     }
-// }
+onMounted(() => {
+    console.log("Parámetros de la ruta en Compra:", route.params);
+});
 
 
 
-const choosenSeats = ref<number[]>([]);
 
-function onChooseSeat(asientoId: number) {
-    console.log(`Se selecciona la asiento ${asientoId}`);
-    // Agregar el asiento seleccionado al array
-    choosenSeats.value.push(asientoId);
-    console.log(choosenSeats.value);
+const choosenSeats = ref<Seat[]>([]);
+
+
+function onChooseSeat(asientoId: number, num_Asiento: number) {
+    console.log(`Asiento seleccionado: ${asientoId}, Número: ${num_Asiento}`);
+    const seat = { asientoId, num_Asiento };
+    choosenSeats.value.push(seat);
+    console.log("Asientos seleccionados después de agregar:", choosenSeats.value);
     // Guardar en el sessionStorage
     sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
 }
 
 function onUnchooseSeat(asientoId: number) {
-    console.log(`Se deselecciona la asiento ${asientoId}`);
-    // Filtrar el array para eliminar la asiento deseleccionada
-    choosenSeats.value = choosenSeats.value.filter(seatId => seatId !== asientoId);
-    console.log(choosenSeats.value);
+    console.log(`Asiento deseleccionado: ${asientoId}`);
+    choosenSeats.value = choosenSeats.value.filter(seat => seat.asientoId !== asientoId);
+    console.log("Asientos seleccionados después de quitar:", choosenSeats.value);
     // Actualizar el sessionStorage
     sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
 }
@@ -100,15 +105,13 @@ function onUnchooseSeat(asientoId: number) {
 async function updateSeatStatus() {
     try {
         // Crear un array de promesas para cada solicitud de actualización
-        const updatePromises = choosenSeats.value.map(asientoId => 
-            fetch(`http://localhost:5008/Asiento/${asientoId}`, {
+        const updatePromises = choosenSeats.value.map(seat => 
+            fetch(`http://localhost:5008/Asiento/${seat.asientoId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    reservado: true,
-                }),
+                body: JSON.stringify({ reservado: true }),
             })
         );
 
@@ -148,8 +151,12 @@ async function updateSeatStatus() {
                     <div v-if="obra && obra.asientos">
                         <div v-for="filaIndex in 10" :key="filaIndex" class="fila">
                             <IconAsiento v-for="asiento in obra.asientos.slice((filaIndex - 1) * 10, filaIndex * 10)"
-                                :key="asiento.asientoId" :isFree="!asiento.reservado" :asientoid="asiento.asientoId" :numAsiento="asiento.num_Asiento"
-                                @selectSeat="onChooseSeat" @unselectSeat="onUnchooseSeat" />
+            :key="asiento.asientoId"
+            :isFree="!asiento.reservado"
+            :asientoid="asiento.asientoId"
+            :num_Asiento="asiento.num_Asiento"
+            @selectSeat="onChooseSeat(asiento.asientoId, asiento.num_Asiento)"
+            @unselectSeat="onUnchooseSeat(asiento.asientoId)" />
                         </div>
                     </div>
 
@@ -199,6 +206,23 @@ async function updateSeatStatus() {
   border: 3px solid #000000;
 }
 .btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+ .buttonCont .cancelBtn button {
+    margin-top: 1rem;
+  display: inline-block;
+  padding: 0.9rem 3rem;
+  font-size: 1.7rem;
+  color: var(--black);
+  background: #D8BE02;
+  cursor: pointer;
+  border: 3px solid #000000;
+}
+ .buttonCont .cancelBtn button:hover {
+  background-color: rgb(204, 0, 41);
+  transition: 0.3s ease background-color;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 .content {
