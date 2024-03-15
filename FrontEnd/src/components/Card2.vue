@@ -1,14 +1,13 @@
 <script setup lang="ts">
-defineProps(['obra']);
+defineProps(['estreno']);
 import { RouterLink } from 'vue-router';
 </script>
 
 <template>
   <div class="card">
-    <!-- <img :src="obra.imagen" :alt="obra.titulo" /> -->
-    <img src="@/assets/hamlet.jpg" class="coolcard__img" alt="Hamlet" width="150" height="150">
+    <div class="coolcard__img"><img :src="'src/assets/' + estreno.imagen" :alt="estreno.titulo" width="150" height="150"></div>
     <div class="coolcard__body">
-            <h1 class="coolcard__title">{{obra.titulo}}</h1>
+            <h1 class="coolcard__title">{{estreno.titulo}}</h1>
             <div class="coolcard__text">
             <a  class="btn">Proximamente</a>
             </div>
@@ -34,8 +33,15 @@ import { RouterLink } from 'vue-router';
 }
 
 .coolcard__img {
-  width: 100%; /* Asegura que la imagen cubra el ancho de la tarjeta */
-  height: auto; /* Mantiene la proporción de la imagen */
+  width: 100%; /* Ancho completo de la tarjeta */
+  height: 200px; /* Altura fija para la imagen */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que sobrepase los bordes */
+}
+
+.coolcard__img img {
+  width: 100%; /* Ancho completo del contenedor de la imagen */
+  height: 100%; /* Altura completa del contenedor de la imagen */
+  object-fit: cover; /* Ajusta la imagen para cubrir todo el contenedor */
 }
 
 .coolcard__body {

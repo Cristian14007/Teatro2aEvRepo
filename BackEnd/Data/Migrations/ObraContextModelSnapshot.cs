@@ -1477,25 +1477,25 @@ namespace BackEnd.Data.Migrations
                         new
                         {
                             EstrenoId = 1,
-                            Imagen = "admin@gmail.com",
+                            Imagen = "popins.jpg",
                             Titulo = "Mary Poppins"
                         },
                         new
                         {
                             EstrenoId = 2,
-                            Imagen = "user1@gmail.com",
+                            Imagen = "celes.png",
                             Titulo = "La Celestina"
                         },
                         new
                         {
                             EstrenoId = 3,
-                            Imagen = "user1@gmail.com",
+                            Imagen = "bodas.png",
                             Titulo = "Bodas de sangre"
                         },
                         new
                         {
                             EstrenoId = 4,
-                            Imagen = "user1@gmail.com",
+                            Imagen = "coldplay.png",
                             Titulo = "Tributo a coldplay"
                         });
                 });
@@ -1569,7 +1569,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 8, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
-                            Imagen = "ruta imagen 1",
+                            Imagen = "hamlet.jpg",
                             Interpretes = "A.Torres, Cristian, Pablo.Pe, Ricardon, Albertos & Sofía",
                             Precio = 30,
                             Sala = 1,
@@ -1586,7 +1586,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
-                            Imagen = "ruta imagen 2",
+                            Imagen = "leon.png",
                             Interpretes = "Marta Soler, Luis Gomez, Ana Páez, Mario Ruiz",
                             Precio = 25,
                             Sala = 2,
@@ -1603,7 +1603,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 9, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Tragedia",
-                            Imagen = "ruta imagen 3",
+                            Imagen = "romeo.png",
                             Interpretes = "Elena Nuñez, Jorge Sanz",
                             Precio = 20,
                             Sala = 3,
@@ -1620,7 +1620,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 12, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 8, 19, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
-                            Imagen = "ruta imagen 4",
+                            Imagen = "casa.png",
                             Interpretes = "Carmen Linares, Pilar Tena, Laura Ortega",
                             Precio = 30,
                             Sala = 4,
@@ -1637,7 +1637,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 16, 22, 45, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
-                            Imagen = "ruta imagen 5",
+                            Imagen = "juan.png",
                             Interpretes = "Juan Martínez, Clara Ros, Miguel Ángel Jiménez",
                             Precio = 20,
                             Sala = 3,
@@ -1654,7 +1654,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 18, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 8, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
-                            Imagen = "ruta imagen 6",
+                            Imagen = "cats.png",
                             Interpretes = "Ana Belén, Luis Fonsi, Rosalía Vila",
                             Precio = 25,
                             Sala = 1,
@@ -1671,7 +1671,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 15, 22, 30, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
-                            Imagen = "ruta imagen 7",
+                            Imagen = "mise.png",
                             Interpretes = "Pedro Fernández, Diana Navarro, Sergio Dalma",
                             Precio = 25,
                             Sala = 3,
@@ -1688,7 +1688,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 20, 21, 15, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 14, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Comedia",
-                            Imagen = "ruta imagen 7",
+                            Imagen = "tempes.png",
                             Interpretes = "Carlos Sánchez, Marta Rivera, Daniel López",
                             Precio = 20,
                             Sala = 3,
@@ -1705,7 +1705,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 16, 21, 30, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 17, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Musical",
-                            Imagen = "ruta imagen 7",
+                            Imagen = "west.png",
                             Interpretes = "Ángela Ponce, Miguel Torres, Laura Jiménez",
                             Precio = 25,
                             Sala = 3,
@@ -1722,7 +1722,7 @@ namespace BackEnd.Data.Migrations
                             Fecha_Estreno_1 = new DateTime(2024, 4, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             Fecha_Estreno_2 = new DateTime(2024, 5, 28, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Genero = "Drama",
-                            Imagen = "ruta imagen 7",
+                            Imagen = "fastas.png",
                             Interpretes = "Javier Gómez, Raquel del Pozo, Mario Casas",
                             Precio = 30,
                             Sala = 4,

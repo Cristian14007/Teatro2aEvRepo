@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router';
 <template>
   <div class="card">
     <!-- <img :src="obra.imagen" :alt="obra.titulo" /> -->
-    <img src="@/assets/hamlet.jpg" alt="Hamlet" width="150" height="150">
+    <img :src="'src/assets/' + obra.imagen" :alt="obra.titulo" width="150" height="150">
     <h3>{{ obra.titulo }}</h3>
     <RouterLink :to="{ name: 'HorarioView', params: { obraId: obra.obraId }}" class="btn" id="cartebtn">Comprar entradas</RouterLink>
     </div>

@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import IconAsiento from '@/components/icons/IconButaca.vue';
+import IconEscenario from '@/components/icons/IconEscenario.vue';
 import { ref, onMounted, computed } from 'vue';
 //import axios from 'axios';
 import { useRoute } from 'vue-router';
@@ -163,7 +164,7 @@ async function updateSeatStatus() {
                 </div>
             </div>
             <div class="escenario">
-                <div>escenario</div>
+                <div><IconEscenario></IconEscenario></div>
             </div>
         </div>
         <div class="buttonCont">
@@ -349,6 +350,7 @@ async function updateSeatStatus() {
     height: 100%;
     width: 60%;
 }
+
 
 .selection .button {
     width: 100%;

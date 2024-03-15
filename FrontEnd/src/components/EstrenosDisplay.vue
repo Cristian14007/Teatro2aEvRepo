@@ -2,14 +2,14 @@
 
 import { ref, onMounted, computed } from 'vue';
 import Card2 from '../components/Card2.vue'
-interface Obra {
-  obraId: number;
+interface estreno {
+  estrenoId: number;
   titulo: string;
   imagen: string;
   
 }
 
-const obras = ref<Obra[]>([]);
+const estrenos = ref<estreno[]>([]);
 
 
 onMounted(async () => {
@@ -17,7 +17,7 @@ onMounted(async () => {
     const response = await fetch('http://localhost:5008/Estreno');
     const data = await response.json();
     console.log(data); // Esto te mostrará los datos exactos que estás recibiendo
-    obras.value = data;
+    estrenos.value = data;
   } catch (error) {
     console.error('Error:', error);
   }
@@ -32,7 +32,7 @@ onMounted(async () => {
 <template>
 
   <div class="container">
-    <Card2 v-for="obra in obras" :key="obra.obraId" :obra="obra" />
+    <Card2 v-for="estreno in estrenos" :key="estreno.estrenoId" :estreno="estreno" />
 
 
   </div>
