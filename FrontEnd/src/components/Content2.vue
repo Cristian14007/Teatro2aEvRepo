@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="image">
-                <img src="@/assets/hamlet.jpg" alt="Hamlet" width="150" height="150">
+              <img :src="`/` + obra?.imagen" :alt="obra?.titulo" width="150" height="150">
             </div>
 
             <div class="content">

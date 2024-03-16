@@ -11,21 +11,26 @@ const router = useRouter(); // Obtiene el objeto router
 import { toRaw } from 'vue';
 
 async function proceedToPurchase() {
-    await updateSeatStatus();
-
-    console.log("Asientos seleccionados (reactivos):", choosenSeats.value);
-    console.log("Asientos seleccionados (raw):", toRaw(choosenSeats.value));
-
-
     const selectedSeatNumbers = choosenSeats.value.map(seat => seat.num_Asiento);
+
+    // Verificar si hay asientos seleccionados
+    if (selectedSeatNumbers.length === 0) {
+        alert('No tienes asientos seleccionados');
+        return; // Detener la función aquí si no hay asientos seleccionados
+    }
+
     console.log("Asientos seleccionados:", selectedSeatNumbers);
 
+    // Continuar con la navegación si hay asientos seleccionados
     router.push({ 
         name: 'CompraView', 
         params: { 
             selectedSeats: selectedSeatNumbers.join(',') 
         } 
     });
+
+    
+    await updateSeatStatus();
 }
 
 
@@ -36,7 +41,10 @@ const route = useRoute();
 const obraId = route.params.obraId;
 const obra = ref<Obra | null>(null);
 const seats = ref<Array<Asiento>>([]);
-const calcularCantidad = computed(() => seats.value.length);
+    const calcularCantidad = computed(() => {
+  // Filtrar solo los asientos que no están reservados y contarlos
+  return seats.value.filter(seat => !seat.reservado).length;
+});
 interface Obra {
     obraId: number;
     titulo: string;
@@ -143,10 +151,10 @@ async function updateSeatStatus() {
 <template>
     <div class="content">
         <div class="selection">
-            <div class="title">
-                <h2>SELECCION Asientos</h2>
+            <h1 class="heading"> Selección <span>Asientos</span> </h1>
+
                 <h3>Total de Asientos: {{ calcularCantidad }}</h3>
-            </div>
+
             <div class="gridasientos">
                 <div class="asientos">
                     <div v-if="obra && obra.asientos">

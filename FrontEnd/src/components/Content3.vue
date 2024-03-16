@@ -6,7 +6,7 @@
 <div class="row">
 
     <div class="image">
-                <img src="@/assets/hamlet.jpg" alt="Hamlet" width="150" height="150">
+      <img :src="`/` + obra?.imagen" :alt="obra?.titulo" width="150" height="150">
             
         <div class="row">
             <div class="col-6" style="border: 3px solid black; padding: 10px; text-align: center;font-size:200%;">Importe</div>
@@ -63,7 +63,7 @@
                     required>
             </div>
             <div class="proceedBtnEl">
-                <RouterLink :to="{ name: 'EntradaView', params: { obraId: obra?.obraId ?? 'defaultId' }}" class="btn" id="entradabtn">Comprar entradas</RouterLink>
+              <RouterLink :to="{ name: 'EntradaView', params: { obraId: obra?.obraId ?? 'defaultId', selectedSeats: selectedSeatNumbers.join(',') } }" class="btn" id="entradabtn"> Comprar entradas</RouterLink>
              </div>
         </form>
     </div>
@@ -129,6 +129,7 @@ function formatDate(dateString: string): string {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${day}-${month}-${year} / ${hours}:${minutes}`;
 }
+
 </script>
   
   
@@ -241,7 +242,7 @@ h2 {
   padding: 0.9rem 3rem;
   font-size: 1.7rem;
   color: var(--black);
-  background: #D8BE02;
+  background: #F0D303;
   cursor: pointer;
   border: 3px solid #000000;
 }

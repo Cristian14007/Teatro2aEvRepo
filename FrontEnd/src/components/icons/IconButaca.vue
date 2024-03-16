@@ -72,7 +72,7 @@ function chooseSeat(asientoid: number, isFree: boolean) {
 }
 
 .taken {
-    fill: rgb(50, 50, 50);
+    fill:#800000;
     stroke-width: 1;
     stroke: rgb(0, 0, 0);
 }

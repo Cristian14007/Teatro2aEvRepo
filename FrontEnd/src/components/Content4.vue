@@ -6,7 +6,7 @@
 <div class="row">
 
     <div class="image">
-                <img src="@/assets/hamlet.jpg" alt="Hamlet" width="150" height="150">
+        <img :src="`/` + obra?.imagen" :alt="obra?.titulo" width="150" height="150">
             </div>
 
     <div class="content">
@@ -24,17 +24,17 @@
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
-            <div class="col-12" id="obra-sala" style="border: 3px solid black; padding: 10px; text-align: center;">{{ obra ? obra.sala : 'Cargando...' }} </div>
+            <div class="col-12" id="obra-sala" style="border: 3px solid black; padding: 10px; text-align: center;">{{ obra ? obra.sala +' sala': 'Cargando...' }} </div>
             
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
-            <div class="col-12" id="obra-importe" style="border: 3px solid black; padding: 10px; text-align: center;">{{ obra ? obra.precio : 'Cargando...' }} </div>
+            <div class="col-12" id="obra-importe" style="border: 3px solid black; padding: 10px; text-align: center;">{{ obra ? obra.precio + ' €' : 'Cargando...' }} </div>
             
         </div>
         <!-- Primera fila con dos columnas -->
         <div class="row">
-            <div class="col-12" id="obra-asientos" style="border: 3px solid black; padding: 10px; text-align: center;"> asientos</div>
+            <div class="col-12" id="obra-asientos" style="border: 3px solid black; padding: 10px; text-align: center;">  {{ selectedSeatNumbers.join(', ') }}</div>
         </div>
     </div>
 
@@ -51,6 +51,8 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const obraId = route.params.obraId;
 const obra = ref<Obra | null>(null);
+    const selectedSeats = route.params.selectedSeats;
+  const selectedSeatNumbers = Array.isArray(selectedSeats) ? selectedSeats : [selectedSeats];
 
 interface Obra {
   obraId: number;
