@@ -1,0 +1,12 @@
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\bin\Debug\net6.0\BackEnd.Models.deps.json
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\bin\Debug\net6.0\BackEnd.Models.dll
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\bin\Debug\net6.0\BackEnd.Models.pdb
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.AssemblyInfoInputs.cache
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.AssemblyInfo.cs
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.csproj.CoreCompileInputs.cache
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.sourcelink.json
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.dll
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\refint\BackEnd.Models.dll
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\BackEnd.Models.pdb
+C:\Users\atorr\OneDrive\Escritorio\apuntesfp\DAW\2.2evdramask\BackEnd\Models\obj\Debug\net6.0\ref\BackEnd.Models.dll

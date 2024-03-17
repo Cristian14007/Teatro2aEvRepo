@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6CMT8H/jb5bt5GFMWCP8VywQo2KBTlH7PK6ll3n/Uadqiz9W8cVTK3z4+9/Kma9o1YSVq+GhizrrU9ZUw//0Mw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\atorr\\OneDrive\\Escritorio\\apuntesfp\\DAW\\2.2evdramask\\BackEnd\\Models\\BackEnd.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\atorr\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\atorr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\atorr\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}
