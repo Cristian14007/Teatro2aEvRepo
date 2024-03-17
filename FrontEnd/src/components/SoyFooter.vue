@@ -13,13 +13,11 @@
         <img class="small-image" src="../assets/facebook.png" alt="Imagen 2">
         <img class="small-image" src="../assets/twitter.png" alt="Imagen 3">
       </div>
-      <div class="contact-info">
-        <a href="index.html"><h1>Inicio</h1></a>
-        <a href="product.html"><h1>Cartelera</h1></a>
-        <a href="aboutus.html"><h1>Sobre Nosotros</h1></a>
-
-        
-      </div>
+      <nav class="navbar-footer">
+    <RouterLink to="/">Inicio</RouterLink>
+    <RouterLink to="/cartelera">Cartelera</RouterLink>
+    <RouterLink to="/about">Sobre Nosotros</RouterLink>
+    </nav>
       <div class="contact-info">
         <h1>Información de contacto:</h1>
         <br>
@@ -68,15 +66,26 @@ footer {
   font-size: 10px;
   text-align: left;
 }
-.contact-info a {
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
+.navbar-footer{
+    align-items: end;
+}
+.navbar-footer a {
+  display: inline-block; 
+  margin-right: 15px; 
+  color: black; 
+  font-family: Arial, sans-serif; 
+  text-decoration: none; 
+  
+}
+
+.navbar-footer a:hover {
+  text-decoration: underline; 
 }
 
 .small-image {
   width: 40px;
   margin-right: 5px;
 }
+
 
 </style>

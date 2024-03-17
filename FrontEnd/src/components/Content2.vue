@@ -150,5 +150,7 @@ function formatDate(dateString: string): string {
     color: #ccc;
     padding: 1rem 0;
     line-height: 1.8;
-}</style>
+}
+
+</style>
   

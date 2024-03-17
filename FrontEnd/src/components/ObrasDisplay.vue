@@ -94,11 +94,8 @@ function removeFilter() {
 .container {
   display: flex;
   flex-wrap: wrap;
-  /* Esto permite que las tarjetas pasen a la siguiente línea si no hay espacio */
   justify-content: space-around;
-  /* Ajusta el espacio entre las tarjetas */
   gap: 20px;
-  /* Espacio entre las tarjetas */
 }
 
 .filters {
@@ -113,16 +110,19 @@ function removeFilter() {
   font-size: 100%;
 }
 
-.filters select {
-  width: 25%;
+.filters select,
+.filtro-input {
+  width: 100%; /* Ajustado para dispositivos móviles */
   height: 35px;
-  margin-right: 1%;
+  margin-bottom: 10px; /* Espaciado adicional para dispositivos móviles */
+  padding: 0 10px;
 }
 
 .filters p {
-  float: left;
+  width: 100%; /* Ajustar el ancho para dispositivos móviles */
+  text-align: center; /* Centrar texto para una mejor visualización en dispositivos móviles */
   color: black;
-  margin-right: 1%;
+  margin: 10px 0; /* Añadir margen superior e inferior */
 }
 
 .filters #removeFilter {
@@ -135,10 +135,16 @@ function removeFilter() {
   color: rgb(233, 32, 32);
 }
 
-.filtro-input {
-  width: 25%;
-  height: 35px;
-  margin-right: 1%;
-  padding: 0 10px;
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .filters select,
+  .filtro-input {
+    width: 100%; /* Ocupa todo el ancho en dispositivos pequeños */
+    margin-right: 0; /* Eliminar margen derecho */
+  }
+
+  .filters p {
+    float: none; /* Eliminar flotado para evitar problemas de diseño */
+  }
 }
 </style>

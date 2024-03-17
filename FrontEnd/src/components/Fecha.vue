@@ -113,8 +113,20 @@ function formatDate(dateString: string): string {
   cursor: pointer;
   border: 3px solid #000000;
 }
+
 .btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.7rem 2rem; /* Padding más pequeño para dispositivos móviles */
+    font-size: 1.4rem; /* Tamaño de fuente más pequeño */
+    margin-top: 0.5rem; /* Margen superior ajustado */
+  }
+}
+
+
 </style>
   

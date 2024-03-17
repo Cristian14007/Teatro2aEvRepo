@@ -42,30 +42,29 @@
     <div class="content">
 
 
-        <form action="tu-servidor-de-procesamiento" method="post">
+      <form @submit.prevent="verificarDatos">
+        <div class="form-group">
+            <label for="cardNumber"><h2>Número de Tarjeta</h2></label>
+            <input type="text" id="cardNumber" v-model="cardNumber" placeholder="1234 5678 9012 3456"
+                maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" required>
+        </div>
 
+        <div class="form-group">
+            <label for="cardExpiry"><h2>Fecha de Caducidad</h2></label>
+            <input type="text" id="cardExpiry" v-model="cardExpiry" placeholder="MM/YY" pattern="\d{2}/\d{2}"
+                required>
+        </div>
 
-            <div class="form-group">
-                <label for="cardNumber"><h2>Número de Tarjeta</h2></label>
-                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
-                    maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" required>
-            </div>
+        <div class="form-group">
+            <label for="cardCVV"><h2>CVV</h2></label>
+            <input type="text" id="cardCVV" v-model="cardCVV" placeholder="123" maxlength="3" pattern="\d{3}"
+                required>
+        </div>
 
-            <div class="form-group">
-                <label for="cardExpiry"><h2>Fecha de Caducidad</h2></label>
-                <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" pattern="\d{2}/\d{2}"
-                    required>
-            </div>
-
-            <div class="form-group">
-                <label for="cardCVV"><h2>CVV</h2></label>
-                <input type="text" id="cardCVV" name="cardCVV" placeholder="123" maxlength="3" pattern="\d{3}"
-                    required>
-            </div>
-            <div class="proceedBtnEl">
-              <RouterLink :to="{ name: 'EntradaView', params: { obraId: obra?.obraId ?? 'defaultId', selectedSeats: selectedSeatNumbers.join(',') } }" class="btn" id="entradabtn"> Comprar entradas</RouterLink>
-             </div>
-        </form>
+        <div class="proceedBtnEl">
+            <button type="submit" class="btn" id="entradabtn">Comprar entradas</button>
+        </div>
+    </form>
     </div>
 </div>
 
@@ -76,8 +75,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 const obraId = route.params.obraId;
 const obra = ref<Obra | null>(null);
   const selectedSeats = route.params.selectedSeats;
@@ -130,6 +131,27 @@ function formatDate(dateString: string): string {
   return `${day}-${month}-${year} / ${hours}:${minutes}`;
 }
 
+
+const cardNumber = ref('');
+const cardExpiry = ref('');
+const cardCVV = ref('');
+
+const verificarDatos = () => {
+    if (!cardNumber.value || !cardExpiry.value || !cardCVV.value) {
+        alert('Por favor, completa todos los campos');
+        return;
+    }
+    
+    // Si todos los campos están llenos, navega a EntradaView
+    router.push({ 
+    name: 'EntradaView', 
+    params: { 
+        obraId, // Directamente, si no es una ref
+        selectedSeats: selectedSeatNumbers.join(',') // Si no es una ref
+    }
+});
+
+};
 </script>
   
   
@@ -248,6 +270,29 @@ h2 {
 }
 .btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+@media (max-width: 541px) {
+  html {
+    font-size: 50%;
+  }
+  .about .row .image img {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+    display: block;
+  }
+  .about .row .image .container {
+    margin-left: 15%;
+  }
+  .key {
+    margin-bottom: -150%;
+    left: -500px;
+    z-index: -500;
+  }
+  .menu .box-container .coolcard {
+    height: 350px;
+    width: 250px;
+  }
 }
 </style>
   

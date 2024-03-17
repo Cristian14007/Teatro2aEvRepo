@@ -42,7 +42,7 @@ const router = createRouter({
             props: true 
         },
         {
-            path: '/entrada/:obraId',
+            path: '/entrada/:obraId/:selectedSeats?',
             name: 'EntradaView',
             component: EntradaView
         },

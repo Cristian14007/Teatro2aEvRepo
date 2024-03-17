@@ -141,25 +141,22 @@ onMounted(async () => {
 }
 
 .about .row h1 {
-    color: #F4E8DA;
-    font-size: 2.5em;
-    letter-spacing: 3px;
+    font-size: 2.5em; /* Tamaño de fuente original */
 }
 
 .about .row .content {
-    flex: 1 1 35rem;
+    flex: 1 1 35rem; /* Originalmente 35rem */
     padding: 5rem;
 }
 
 .about .row .content h3 {
-    font-size: 3rem;
-    color: var(--white);
+    font-size: 3rem; /* Tamaño de fuente original */
 }
 
 .about .row .content p {
-    font-size: 1.6rem;
-    color: #ccc;
-    padding: 1rem 0;
-    line-height: 1.8;
-}</style>
+    font-size: 1.6rem; /* Tamaño de fuente original */
+}
+
+</style>
+
   

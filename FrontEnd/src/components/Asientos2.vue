@@ -158,8 +158,8 @@ async function updateSeatStatus() {
             <div class="gridasientos">
                 <div class="asientos">
                     <div v-if="obra && obra.asientos">
-                        <div v-for="filaIndex in 10" :key="filaIndex" class="fila">
-                            <IconAsiento v-for="asiento in obra.asientos.slice((filaIndex - 1) * 10, filaIndex * 10)"
+                        <div v-for="filaIndex in 5" :key="filaIndex" class="fila">
+                            <IconAsiento v-for="asiento in obra.asientos.slice((filaIndex - 1) * 5, filaIndex * 5)"
             :key="asiento.asientoId"
             :isFree="!asiento.reservado"
             :asientoid="asiento.asientoId"
@@ -319,7 +319,7 @@ async function updateSeatStatus() {
     height: 70%;
 }
 
-.selection .gridButacas .butacas {
+.selection .gridButacas .asientos {
     width: 100%;
     height: 380px;
     display: grid;
@@ -329,14 +329,14 @@ async function updateSeatStatus() {
     align-items: center;
 }
 
-.selection .gridButacas .butacas .fila {
+.selection .gridButacas .asientos .fila {
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.selection .gridButacas .butacas .butaca {
+.selection .gridButacas .asientos .asiento {
     width: 22px;
     height: 22px;
     background-size: cover;

@@ -39,23 +39,24 @@ function chooseSeat(asientoid: number, isFree: boolean) {
 </script>
 
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 35" width="43" height="35">
-        <g ref="seatRef" :class="[isFree ? 'free' : 'taken']" @click="chooseSeat(asientoid, isFree)">
-            <!-- respaldo -->
-            <rect x="6" y="1" width="30" height="20" rx="5" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 70" width="86" height="70">
+  <g ref="seatRef" :class="[isFree ? 'free' : 'taken']" @click="chooseSeat(asientoid, isFree)">
+    <!-- respaldo -->
+    <rect x="12" y="2" width="60" height="40" rx="10" />
 
-            <!-- asiento -->
-            <rect x="6" y="21" width="30" height="10" rx="5" />
+    <!-- asiento -->
+    <rect x="12" y="42" width="60" height="20" rx="10" />
 
-            <!-- reposabrazos izquierdo -->
-            <rect x="1" y="13" width="10" height="20" rx="5" />
+    <!-- reposabrazos izquierdo -->
+    <rect x="2" y="26" width="20" height="40" rx="10" />
 
-            <!-- reposabrazos derecho -->
-            <rect x="31" y="13" width="10" height="20" rx="5" />
+    <!-- reposabrazos derecho -->
+    <rect x="62" y="26" width="20" height="40" rx="10" />
 
-            <text x="20" y="25" fill="black" text-anchor="middle" alignment-baseline="middle">{{ num_Asiento }}</text>
-        </g>
-    </svg>
+    <text x="40" y="35" fill="black" text-anchor="middle" alignment-baseline="middle">{{ num_Asiento }}</text>
+  </g>
+</svg>
+
 </template>
 
 <style>
