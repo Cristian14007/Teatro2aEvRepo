@@ -1,43 +1,24 @@
 <script setup lang="ts">
-
-import { ref, onMounted, computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import Card from '../components/Card.vue'
-interface Obra {
-  obraId: number;
-  titulo: string;
-  imagen: string;
-  descripcion: string;
-  genero: string;
-  valoracion: number;
-  precio: number;
-}
+import { useFunctionStore } from '../stores/FunctionStore';
 
-const obras = ref<Obra[]>([]);
-const categoriaSeleccionada = ref('');
-const terminoBusqueda = ref('');
-const opcionOrdenacion = ref('');
+const store = useFunctionStore();
 
-onMounted(async () => {
-  try {
-    const response = await fetch('http://dramaskBack.retocsv.es:80/Obra');
-    const data = await response.json();
-    console.log(data); // Esto te mostrará los datos exactos que estás recibiendo
-    obras.value = data;
-  } catch (error) {
-    console.error('Error:', error);
-  }
+onMounted(() => {
+  store.cargarObras();
 });
 
 const obrasFiltradasYOrdenadas = computed(() => {
-  let obrasFiltradas = obras.value
+  let obrasFiltradas = store.obras
     .filter(obra => {
-      return categoriaSeleccionada.value ? obra.genero === categoriaSeleccionada.value : true;
+      return store.categoriaSeleccionada ? obra.genero === store.categoriaSeleccionada : true;
     })
     .filter(obra => {
-      return obra.titulo.toLowerCase().includes(terminoBusqueda.value.toLowerCase());
+      return obra.titulo.toLowerCase().includes(store.terminoBusqueda.toLowerCase());
     });
 
-  switch (opcionOrdenacion.value) {
+  switch (store.opcionOrdenacion) {
     case 'valoracionDesc':
       return obrasFiltradas.sort((a, b) => b.valoracion - a.valoracion);
     case 'precioDesc':
@@ -50,45 +31,36 @@ const obrasFiltradasYOrdenadas = computed(() => {
       return obrasFiltradas;
   }
 });
-
-
-function removeFilter() {
-  categoriaSeleccionada.value = '';
-  terminoBusqueda.value = '';
-  opcionOrdenacion.value = '';
-}
 </script>
 
 <template>
   <section class="filter" id="filter">
     <div class="filters">
-      <label>Filtro: &nbsp;</label>
-      <select class="select" v-model="opcionOrdenacion" name="selectOrdenacion">
+      <!-- A continuación, los v-model se actualizan para enlazarlos directamente con el store -->
+      <select class="select" v-model="store.opcionOrdenacion" name="selectOrdenacion">
         <option value="">Sin Ordenar</option>
         <option value="valoracionDesc">Mayor Valoración</option>
         <option value="precioDesc">Mayor Precio</option>
         <option value="valoracionAsc">Menor Valoración</option>
         <option value="precioAsc">Menor Precio</option>
       </select>
-      <label>Categoría: &nbsp;</label>
-      <select class="select" v-model="categoriaSeleccionada" name="select2">
+      <select class="select" v-model="store.categoriaSeleccionada" name="select2">
         <option value="">No Filtro</option>
         <option value="Drama">Drama</option>
         <option value="Musical">Musical</option>
         <option value="Tragedia">Tragedia</option>
         <option value="Comedia">Comedia</option>
       </select>
-      <label>Busqueda: &nbsp;</label>
-      <input type="text" v-model="terminoBusqueda" placeholder="Buscar obra" class="filtro-input">
-      <span @click="removeFilter" id="removeFilter" class="fas fa-times"></span>
+      <input type="text" v-model="store.terminoBusqueda" placeholder="Buscar obra" class="filtro-input">
+      <span @click="store.removeFilter" id="removeFilter" class="fas fa-times"></span>
     </div>
   </section>
 
   <div class="container">
     <Card v-for="obra in obrasFiltradasYOrdenadas" :key="obra.obraId" :obra="obra" />
-
   </div>
 </template>
+
 
 <style scoped>
 .container {

@@ -1,27 +1,52 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import { onMounted, computed } from 'vue';
 import IconAsiento from '@/components/icons/IconButaca.vue';
 import IconEscenario from '@/components/icons/IconEscenario.vue';
-import { ref, onMounted, computed } from 'vue';
-//import axios from 'axios';
-import { useRoute } from 'vue-router';
-import { useRouter } from 'vue-router';
-const router = useRouter(); // Obtiene el objeto router
+import { useRoute, useRouter } from 'vue-router';
+import { useAsientoStore } from '@/stores/AsientoStore';
 
-import { toRaw } from 'vue';
+const route = useRoute();
+const router = useRouter();
+const obraId = route.params.obraId;
+const asientoStore = useAsientoStore();
+
+
+onMounted(() => {
+  // Asegurarse de que obraId es un número antes de pasarlo a cargarAsientos
+  const obraIdParam = route.params.obraId;
+  let obraIdNumber = 0;
+
+  if (Array.isArray(obraIdParam)) {
+    // Si es un array, toma el primer elemento y conviértelo a número
+    obraIdNumber = parseInt(obraIdParam[0], 10);
+  } else {
+    // Si no es un array, conviértelo directamente a número
+    obraIdNumber = parseInt(obraIdParam, 10);
+  }
+
+  // Verificar si obraIdNumber es un número válido antes de llamar a cargarAsientos
+  if (!isNaN(obraIdNumber)) {
+    asientoStore.cargarAsientos(obraIdNumber);
+  } else {
+    console.error('ID de obra inválido:', obraIdParam);
+  }
+});
+
+const calcularCantidad = computed(() => {
+  return asientoStore.seats.filter(seat => !seat.reservado).length;
+});
 
 async function proceedToPurchase() {
-    const selectedSeatNumbers = choosenSeats.value.map(seat => seat.num_Asiento);
+    const selectedSeatNumbers = asientoStore.choosenSeats.map(seat => seat.num_Asiento);
 
-    // Verificar si hay asientos seleccionados
     if (selectedSeatNumbers.length === 0) {
         alert('No tienes asientos seleccionados');
-        return; // Detener la función aquí si no hay asientos seleccionados
+        return;
     }
 
     console.log("Asientos seleccionados:", selectedSeatNumbers);
 
-    // Continuar con la navegación si hay asientos seleccionados
     router.push({ 
         name: 'CompraView', 
         params: { 
@@ -29,166 +54,46 @@ async function proceedToPurchase() {
         } 
     });
 
-    
-    await updateSeatStatus();
+    await asientoStore.updateSeatStatus();
 }
-
-
-
-
-// cojo la url y el id de la obra
-const route = useRoute();
-const obraId = route.params.obraId;
-const obra = ref<Obra | null>(null);
-const seats = ref<Array<Asiento>>([]);
-    const calcularCantidad = computed(() => {
-  // Filtrar solo los asientos que no están reservados y contarlos
-  return seats.value.filter(seat => !seat.reservado).length;
-});
-interface Obra {
-    obraId: number;
-    titulo: string;
-    imagen: string;
-    descripcion: string;
-    genero: string;
-    duracion: string;
-    director: string;
-    interpretes: string;
-    fecha: Date;
-    asientos: Array<Asiento>;
-}
-
-interface Asiento {
-    obraId: number;
-    asientoId: number;
-    reservado: boolean;
-    num_Asiento: number;
-
-}
-interface Seat {
-    asientoId: number;
-    num_Asiento: number;
-}
-// Simula una función para cargar los datos de la obra basada en obraId
-onMounted(async () => {
-    try {
-        const obraResponse = await fetch(`http://dramaskBack.retocsv.es:80/Obra/${obraId}`);
-        if (!obraResponse.ok) {
-            throw new Error('Failed to fetch obra details');
-        }
-        const obraData = await obraResponse.json();
-        obra.value = obraData;
-        seats.value = obraData.asientos; // Asume que los asientos están incluidos en la respuesta de la obra
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
-
-onMounted(() => {
-    console.log("Parámetros de la ruta en Compra:", route.params);
-});
-
-
-
-
-const choosenSeats = ref<Seat[]>([]);
-
-
-function onChooseSeat(asientoId: number, num_Asiento: number) {
-    console.log(`Asiento seleccionado: ${asientoId}, Número: ${num_Asiento}`);
-    const seat = { asientoId, num_Asiento };
-    choosenSeats.value.push(seat);
-    console.log("Asientos seleccionados después de agregar:", choosenSeats.value);
-    // Guardar en el sessionStorage
-    sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
-}
-
-function onUnchooseSeat(asientoId: number) {
-    console.log(`Asiento deseleccionado: ${asientoId}`);
-    choosenSeats.value = choosenSeats.value.filter(seat => seat.asientoId !== asientoId);
-    console.log("Asientos seleccionados después de quitar:", choosenSeats.value);
-    // Actualizar el sessionStorage
-    sessionStorage.setItem('choosenSeats', JSON.stringify(choosenSeats.value));
-}
-
-async function updateSeatStatus() {
-    try {
-        // Crear un array de promesas para cada solicitud de actualización
-        const updatePromises = choosenSeats.value.map(seat => 
-            fetch(`http://dramaskBack.retocsv.es:80/Asiento/${seat.asientoId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ reservado: true }),
-            })
-        );
-
-        // Esperar a que todas las solicitudes se completen
-        const responses = await Promise.all(updatePromises);
-
-        // Comprobar si alguna solicitud no fue exitosa
-        const allSuccessful = responses.every(response => response.ok);
-        if (!allSuccessful) {
-            throw new Error('Error al actualizar uno o más asientos');
-        }
-
-        // Limpieza después de la actualización exitosa
-        sessionStorage.removeItem('choosenSeats');
-        choosenSeats.value = [];
-
-        // Aquí puedes redirigir o mostrar un mensaje de éxito
-    } catch (error) {
-        console.error('Error al actualizar los asientos:', error);
-    }
-}
-
-
-
 </script>
-
 
 <template>
     <div class="content">
         <div class="selection">
             <h1 class="heading"> Selección <span>Asientos</span> </h1>
-
                 <h3>Total de Asientos: {{ calcularCantidad }}</h3>
-
             <div class="gridasientos">
                 <div class="asientos">
-                    <div v-if="obra && obra.asientos">
+                    <div v-if="asientoStore.seats.length">
                         <div v-for="filaIndex in 5" :key="filaIndex" class="fila">
-                            <IconAsiento v-for="asiento in obra.asientos.slice((filaIndex - 1) * 5, filaIndex * 5)"
-            :key="asiento.asientoId"
-            :isFree="!asiento.reservado"
-            :asientoid="asiento.asientoId"
-            :num_Asiento="asiento.num_Asiento"
-            @selectSeat="onChooseSeat(asiento.asientoId, asiento.num_Asiento)"
-            @unselectSeat="onUnchooseSeat(asiento.asientoId)" />
+                            <IconAsiento 
+                                v-for="asiento in asientoStore.seats.slice((filaIndex - 1) * 5, filaIndex * 5)"
+                                :key="asiento.asientoId"
+                                :isFree="!asiento.reservado"
+                                :asientoid="asiento.asientoId"
+                                :num_Asiento="asiento.num_Asiento"
+                                @selectSeat="asientoStore.onChooseSeat(asiento.asientoId, asiento.num_Asiento)"
+                                @unselectSeat="asientoStore.onUnchooseSeat(asiento.asientoId)" />
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="escenario">
-                <div><IconEscenario></IconEscenario></div>
+                <IconEscenario></IconEscenario>
             </div>
         </div>
         <div class="buttonCont">
-              <div class="cancelBtn">
+            <div class="cancelBtn">
                 <button id="cancelBtn">Cancelar</button>
-              </div>
-              <div class="proceedBtnEl">
-                <!--<button href="Compra.html?id=placeholder" id="proceedBtn">Continuar</button>-->
-                 <!-- <RouterLink :to="{ name: 'CompraView', params: { obraId: obra?.obraId ?? 'defaultId' }}" class="btn" id="proceedBtn">Continuar</RouterLink> -->
-                 <button @click="proceedToPurchase" class="btn" id="proceedBtn">Continuar</button>
-
-
-              </div>
             </div>
+            <div class="proceedBtnEl">
+                <button @click="proceedToPurchase" class="btn" id="proceedBtn">Continuar</button>
+            </div>
+        </div>
     </div>
 </template>
+
 
 
 <style scoped lang="scss">
